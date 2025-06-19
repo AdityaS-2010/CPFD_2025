@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <ul class="menu">
+        <li class="dropdown" id="pathwayDropdown">
+            <button class="dropbtn">Select the pathway</button>
+            <ul class="dropdown-content">
+                <li><a href="Pathways/ame.html">Arts, Media &amp; Entertainment</a></li>
+                <li><a href="Pathways/business.html">Business, Finance, &amp; Marketing</a></li>
+                <li><a href="Pathways/engineering.html">Engineering &amp; Architecture</a></li>
+                <li><a href="Pathways/health.html">Health Science &amp; Medical Technology</a></li>
+                <li><a href="Pathways/ict.html">Information &amp; Communication Technology</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var dropdown = document.getElementById('pathwayDropdown');
+    var button = dropdown.querySelector('.dropbtn');
+    button.addEventListener('click', function(event) {
+        dropdown.classList.toggle('show');
+        event.stopPropagation();
+    });
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function() {
+        dropdown.classList.remove('show');
+    });
+});
+</script>
+
+</body>
+</html>

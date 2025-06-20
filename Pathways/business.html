@@ -4,10 +4,178 @@
   <meta charset="UTF-8" />
   <title>Business, Finance & Marketing</title>
   <link rel="stylesheet" href="../style.css" />
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    textarea {
+      width: 100%;
+      resize: none;
+    }
+    .selector-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
+
 <body>
   <h1>Business, Finance & Marketing</h1>
   <p>This pathway is ideal for students interested in working with numbers, people, and public-facing roles. It offers opportunities to explore global business environments through topics such as accounting, finance, taxes, investments, marketing, and asset management. Students also master key business principles and procedures.</p>
+  <button onclick="fillBusinessElectives()">Auto-fill Business Electives</button>
+
+  <!-- Math selector UI (moved to top of table) -->
+  <div class="selector-row">
+    <label for="mathStart">Select your first math class:</label>
+    <select id="mathStart">
+      <option value="Math Accel">Math Accel</option>
+      <option value="Integrated Math 1a">Integrated Math 1a</option>
+      <option value="Integrated Math 2a">Integrated Math 2a</option>
+      <option value="Integrated Math 2b">Integrated Math 2b</option>
+      <option value="Integrated Math 3a">Integrated Math 3a</option>
+    </select>
+    <button onclick="fillMathPathway()">Auto-fill Math Pathway</button>
+  </div>
+
+  <h2>4-Year Course Planner</h2>
+  <p style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 1rem; margin-bottom: 1rem;">
+  <strong>💡 Planning Tip:</strong> To avoid overlapping classes, please select your math pathway from the dropdown and click <strong>"Auto-fill Math Pathway"</strong> then <strong>"Auto-fill Business Electives"</strong>. You can move or edit courses manually in the table afterwards.
+</p>
+
+  <p>Each trimester has 5 class slots. You may type classes into the boxes. Use "Off-Roll" if you're not taking a class that period.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Grade</th>
+        <th>Trimester 1</th>
+        <th>Trimester 2</th>
+        <th>Trimester 3</th>
+      </tr>
+    </thead>
+    <tbody id="plannerBody">
+      <!-- 9th Grade -->
+      <tr>
+        <th>9th Grade</th>
+        <td>
+          <textarea rows="1" placeholder="Type your classes here!"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+      </tr>
+      <!-- 10th Grade -->
+      <tr>
+        <th>10th Grade</th>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+      </tr>
+      <!-- 11th Grade -->
+      <tr>
+        <th>11th Grade</th>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+      </tr>
+      <!-- 12th Grade -->
+      <tr>
+        <th>12th Grade</th>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+        <td>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+          <textarea rows="1"></textarea>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<button onclick="resetPlanner()">Reset Planner</button>
+
+  <p>Note: Use "Off-Roll" to indicate free periods. Each class is worth 5 credits unless noted otherwise.
+    The order if inputed class doesn't matter, as long as they're in the right trimester.
+  </p>
+
   <a href="../index.html">← Back to Home</a>
+  <script src="../scripts/business.js"></script>
+  <script src="../scripts/math.js"></script>
 </body>
 </html>

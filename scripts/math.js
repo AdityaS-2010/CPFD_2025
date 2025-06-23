@@ -38,20 +38,46 @@ function fillMathPathway() {
   };
 
   const courses = pathways[mathStart];
+  let courseIndex = 0;
 
-  for (let i = 0; i < 4; i++) {
+  // Loop through each grade (row)
+  for (let i = 0; i < 4 && courseIndex < courses.length; i++) {
     const tds = planner[i].querySelectorAll('td');
-    for (let j = 0; j < 3; j++) {
-      const index = i * 3 + j;
-      if (index * 1 < courses.length) {
-        const course = courses[index];
-        if (course.includes('+')) {
-          const [c1, c2] = course.split('+').map(s => s.trim());
-          tds[j].querySelectorAll('textarea')[0].value = c1;
-          tds[j].querySelectorAll('textarea')[1].value = c2;
-        } else {
-          tds[j].querySelectorAll('textarea')[0].value = course;
+    // Loop through each trimester (cell)
+    for (let j = 0; j < 3 && courseIndex < courses.length; j++) {
+      const cell = tds[j];
+      const boxes = cell.querySelectorAll('textarea');
+
+      // Find the next available box in this trimester
+      let boxIdx = 0;
+      while (boxIdx < boxes.length && boxes[boxIdx].value.trim() !== '') {
+        boxIdx++;
+      }
+      if (boxIdx >= boxes.length) continue; // No space in this trimester
+
+      const course = courses[courseIndex];
+
+      if (course.includes('+')) {
+        // Special case: fill two boxes in the same trimester
+        const [c1, c2] = course.split('+').map(s => s.trim());
+        // Find two available boxes
+        let firstBox = -1, secondBox = -1;
+        for (let b = 0; b < boxes.length; b++) {
+          if (boxes[b].value.trim() === '') {
+            if (firstBox === -1) firstBox = b;
+            else if (secondBox === -1) {
+              secondBox = b;
+              break;
+            }
+          }
         }
+        if (firstBox !== -1) boxes[firstBox].value = c1;
+        if (secondBox !== -1) boxes[secondBox].value = c2;
+        // If only one box available, fill c1 and skip c2
+        courseIndex++;
+      } else {
+        boxes[boxIdx].value = course;
+        courseIndex++;
       }
     }
   }

@@ -14,10 +14,13 @@ function fillPE() {
   fillNextAvailableBox(grade9[2], "ENS 3"); // Tri 3
 
   if (!playsSport) {
-    // ENS 4 if no sport
+    // ENS 4 in two separate trimesters in grade 10
     const grade10 = rows[1].querySelectorAll("td");
-    for (let tri = 0; tri < 3; tri++) {
-      if (fillNextAvailableBox(grade10[tri], "ENS 4")) break;
+    let filled = 0;
+    for (let tri = 0; tri < 3 && filled < 2; tri++) {
+      if (fillNextAvailableBox(grade10[tri], "ENS 4")) {
+        filled++;
+      }
     }
   }
 }

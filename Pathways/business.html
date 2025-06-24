@@ -39,6 +39,7 @@
   <button onclick="fillMathPathway()">Auto-fill Math Pathway</button>
   <button onclick="resetPlanner()">Reset Planner</button>
   <button onclick="fillPE()">Auto-fill PE</button>
+  <button onclick="fillEnglishPathway()">Auto-fill English</button>
 
   <div class="selector-row">
     <label for="mathStart">Select your first math class:</label>
@@ -58,6 +59,16 @@
       <option value="yes">Yes</option>
     </select>
   </div>
+  
+  <div class="selector-row">
+  <label for="englishTrack">Select your English track:</label>
+  <select id="englishTrack">
+    <option value="normal">Normal</option>
+    <option value="advanced">Advanced</option>
+  </select>
+</div>
+
+<button onclick="fillEnglishPathway()">Auto-fill English</button>
 
   <h2>4-Year Course Planner</h2>
   <p>Each trimester has 5 class slots. Use "Off-Roll" if you're not taking a class that period.</p>
@@ -108,5 +119,7 @@
   <script src="../scripts/business.js"></script>
   <script src="../scripts/math.js"></script>
   <script src="../scripts/pe.js"></script>
+  <script src="../scripts/english.js"></script>
+
 </body>
 </html>

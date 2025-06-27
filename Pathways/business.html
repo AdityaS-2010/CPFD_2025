@@ -67,8 +67,34 @@
     <option value="advanced">Advanced</option>
   </select>
 </div>
+<div class="selector-row">
+  <label for="outsideLanguage">Will you fulfill your language credits outside of school?</label>
+  <select id="outsideLanguage">
+    <option value="no">No</option>
+    <option value="yes">Yes</option>
+  </select>
+</div>
 
-<button onclick="fillEnglishPathway()">Auto-fill English</button>
+<div class="selector-row">
+  <label for="languageChoice">Which language do you plan to study?</label>
+  <select id="languageChoice">
+    <option value="Spanish">Spanish</option>
+    <option value="Chinese">Chinese</option>
+  </select>
+</div>
+
+<div class="selector-row">
+  <label for="langStartLevel">At which class level will you start?</label>
+  <select id="langStartLevel">
+    <option value="1">1 (e.g. Spanish 1 or Chinese 1)</option>
+    <option value="2">2 (e.g. Spanish 2 or Chinese 2)</option>
+    <option value="3">3 (e.g. Spanish 3 or Chinese 3)</option>
+  </select>
+</div>
+
+<button onclick="fillLanguage()">Auto-fill World Language</button>
+
+
 
   <h2>4-Year Course Planner</h2>
   <p>Each trimester has 5 class slots. Use "Off-Roll" if you're not taking a class that period.</p>
@@ -120,6 +146,8 @@
   <script src="../scripts/math.js"></script>
   <script src="../scripts/pe.js"></script>
   <script src="../scripts/english.js"></script>
+  <script src="../scripts/language.js"></script>
+
 
 </body>
 </html>

@@ -27,13 +27,13 @@ function fillMathPathway() {
       'Integrated Math 2b', 'Integrated Math 3a', 'Integrated Math 3b + Pre-Calc 1',
       'AP Calc AB 1', 'AP Calc AB 2', 'Pre-Calc 2',
       'Bridge to BC', 'AP Calc BC 1', 'AP Calc BC 2',
-      'AP Stats 1', 'AP Stats 2', 'Stats'
+      'AP Stats 1', 'AP Stats 2', 'AP Stats Seminar'
     ],
     'Integrated Math 3a': [
       'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
       'AP Calc AB 1', 'AP Calc AB 2', 'Pre-Calc 2',
       'Bridge to BC', 'AP Calc BC 1', 'AP Calc BC 2',
-      'AP Stats 1', 'AP Stats 2', 'Stats'
+      'AP Stats 1', 'AP Stats 2', 'AP Stats Seminar'
     ]
   };
 

@@ -7,23 +7,23 @@ function fillEnglishPathway() {
   if (englishStart === "normal") {
     // Grade 9
     fillNextAvailableBox(planner[0].querySelectorAll("td")[0], "High School English 1");
-    fillNextAvailableBox(planner[0].querySelectorAll("td")[1], "High School English 2");
+    fillNextAvailableBox(planner[0].querySelectorAll("td")[2], "High School English 2");
     // Grade 10
     fillNextAvailableBox(planner[1].querySelectorAll("td")[0], "High School English 3");
-    fillNextAvailableBox(planner[1].querySelectorAll("td")[1], "High School English 4");
+    fillNextAvailableBox(planner[1].querySelectorAll("td")[2], "High School English 4");
     // Grade 11
     fillNextAvailableBox(planner[2].querySelectorAll("td")[0], "American Literature 1");
-    fillNextAvailableBox(planner[2].querySelectorAll("td")[1], "American Literature 2");
+    fillNextAvailableBox(planner[2].querySelectorAll("td")[2], "American Literature 2");
     // Grade 12
     fillNextAvailableBox(planner[3].querySelectorAll("td")[0], "World Literature 1");
-    fillNextAvailableBox(planner[3].querySelectorAll("td")[1], "World Literature 2");
+    fillNextAvailableBox(planner[3].querySelectorAll("td")[2], "World Literature 2");
   } else if (englishStart === "advanced") {
     // Grade 9
     fillNextAvailableBox(planner[0].querySelectorAll("td")[0], "Honors High School English 1");
-    fillNextAvailableBox(planner[0].querySelectorAll("td")[1], "Honors High School English 2");
+    fillNextAvailableBox(planner[0].querySelectorAll("td")[2], "Honors High School English 2");
     // Grade 10
     fillNextAvailableBox(planner[1].querySelectorAll("td")[0], "Honors Humanities 1");
-    fillNextAvailableBox(planner[1].querySelectorAll("td")[1], "Honors Humanities 2");
+    fillNextAvailableBox(planner[1].querySelectorAll("td")[2], "Honors Humanities 2");
     // Grade 11: AP English Language fills all three trimesters
     const grade11Tds = planner[2].querySelectorAll("td");
     fillNextAvailableBox(grade11Tds[0], "AP English Language 1");

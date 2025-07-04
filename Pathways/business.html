@@ -27,6 +27,7 @@
       align-items: center;
       gap: 1rem;
       margin-bottom: 1rem;
+      flex-wrap: wrap;
     }
   </style>
 </head>
@@ -34,12 +35,6 @@
 <body>
   <h1>Business, Finance & Marketing</h1>
   <p>This pathway is ideal for students interested in working with numbers, people, and public-facing roles...</p>
-
-  <button onclick="fillBusinessElectives()">Auto-fill Business Electives</button>
-  <button onclick="fillMathPathway()">Auto-fill Math Pathway</button>
-  <button onclick="resetPlanner()">Reset Planner</button>
-  <button onclick="fillPE()">Auto-fill PE</button>
-  <button onclick="fillEnglishPathway()">Auto-fill English</button>
 
   <div class="selector-row">
     <label for="mathStart">Select your first math class:</label>
@@ -61,43 +56,68 @@
   </div>
   
   <div class="selector-row">
-  <label for="englishTrack">Select your English track:</label>
-  <select id="englishTrack">
-    <option value="normal">Normal</option>
-    <option value="advanced">Advanced</option>
-  </select>
-</div>
-<div class="selector-row">
-  <label for="outsideLanguage">Will you fulfill your language credits outside of school?</label>
-  <select id="outsideLanguage">
-    <option value="no">No</option>
-    <option value="yes">Yes</option>
-  </select>
-</div>
+    <label for="englishTrack">Select your English track:</label>
+    <select id="englishTrack">
+      <option value="normal">Normal</option>
+      <option value="advanced">Advanced</option>
+    </select>
+  </div>
 
-<div class="selector-row">
-  <label for="languageChoice">Which language do you plan to study?</label>
-  <select id="languageChoice">
-    <option value="Spanish">Spanish</option>
-    <option value="Chinese">Chinese</option>
-  </select>
-</div>
+  <div class="selector-row">
+    <label for="outsideLanguage">Will you fulfill your language credits outside of school?</label>
+    <select id="outsideLanguage">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+  </div>
 
-<div class="selector-row">
-  <label for="langStartLevel">At which class level will you start?</label>
-  <select id="langStartLevel">
-    <option value="1">1 (e.g. Spanish 1 or Chinese 1)</option>
-    <option value="2">2 (e.g. Spanish 2 or Chinese 2)</option>
-    <option value="3">3 (e.g. Spanish 3 or Chinese 3)</option>
-  </select>
-</div>
+  <div class="selector-row">
+    <label for="languageChoice">Which language do you plan to study?</label>
+    <select id="languageChoice">
+      <option value="Spanish">Spanish</option>
+      <option value="Chinese">Chinese</option>
+    </select>
+  </div>
 
-<button onclick="fillLanguage()">Auto-fill World Language</button>
+  <div class="selector-row">
+    <label for="langStartLevel">At which class level will you start?</label>
+    <select id="langStartLevel">
+      <option value="1">1 (e.g. Spanish 1 or Chinese 1)</option>
+      <option value="2">2 (e.g. Spanish 2 or Chinese 2)</option>
+      <option value="3">3 (e.g. Spanish 3 or Chinese 3)</option>
+    </select>
+  </div>
 
+  <div class="selector-row">
+    <label for="scienceOption">Select your science pathway:</label>
+    <select id="scienceOption">
+      <option value="option1">Bio → Bio → Chem → AP Bio</option>
+      <option value="option2">Bio → Bio → Chem → AP Chem</option>
+      <option value="option3">Bio → Chem → Chem → AP Bio</option>
+      <option value="option4">Bio → Chem → Chem → AP Chem</option>
+    </select>
+  </div>
+  
+  <div class="selector-row">
+    <label for="socialScienceTrack">Select your Social Science track:</label>
+    <select id="socialScienceTrack">
+      <option value="normal">Normal</option>
+      <option value="ap">Advanced</option>
+    </select>
+  </div>
 
+  <div class="selector-row">
+    <button onclick="fillAllRequirements()">Auto-fill All Required Classes</button>
+    <button onclick="resetPlanner()">Reset Planner</button>
+  </div>
 
   <h2>4-Year Course Planner</h2>
-  <p>Each trimester has 5 class slots. Use "Off-Roll" if you're not taking a class that period.</p>
+  <p>Note: Use "Off-Roll" to indicate free periods. Each class is worth 5 credits unless noted otherwise.</p>
+<p style="color: darkred; font-weight: bold;">
+⚠ Some trimesters may have fewer than 5 classes auto-filled. 
+If you want a full schedule, please add extra classes, an Off-Roll, or rearrange classes manually.
+</p>
+
 
   <table>
     <thead>
@@ -109,28 +129,24 @@
       </tr>
     </thead>
     <tbody id="plannerBody">
-      <!-- 9th Grade -->
       <tr>
         <th>9th Grade</th>
         <td><textarea rows="1" placeholder="Type your classes here!"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
       </tr>
-      <!-- 10th Grade -->
       <tr>
         <th>10th Grade</th>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
       </tr>
-      <!-- 11th Grade -->
       <tr>
         <th>11th Grade</th>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
       </tr>
-      <!-- 12th Grade -->
       <tr>
         <th>12th Grade</th>
         <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
@@ -143,11 +159,20 @@
   <a href="../index.html">← Back to Home</a>
 
   <script src="../scripts/business.js"></script>
+  <script src="../scripts/language.js"></script>
   <script src="../scripts/math.js"></script>
+  <script src="../scripts/science.js"></script>
   <script src="../scripts/pe.js"></script>
   <script src="../scripts/english.js"></script>
-  <script src="../scripts/language.js"></script>
+  <script src="../scripts/socialscience.js"></script>
 
+  <script>
+function resetPlanner() {
+  const textareas = document.querySelectorAll('#plannerBody textarea');
+  textareas.forEach(area => area.value = '');
+}
+</script>
 
+  </script>
 </body>
 </html>

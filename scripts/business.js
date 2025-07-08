@@ -64,5 +64,6 @@ function fillAllRequirements() {
   fillSciencePathway();
   fillBusinessElectives();
   fillLanguage();
+  fillFineArt();
 }
 

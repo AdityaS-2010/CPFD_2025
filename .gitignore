@@ -1,0 +1,7 @@
+# Ignore environment variables file
+.env
+
+# Node.js example ignores
+node_modules/
+dist/
+build/

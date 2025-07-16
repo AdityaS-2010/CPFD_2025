@@ -14,16 +14,20 @@ function fillPE() {
   fillNextAvailableBox(grade9[2], "ENS 3"); // Tri 3
 
   if (!playsSport) {
-    // ENS 4 in two separate trimesters in grade 10
-    const grade10 = rows[1].querySelectorAll("td");
+    // Figure out which grade user chose for ENS 4
+    const gradeSelect = document.getElementById("ens4Grade");
+    let ens4Grade = parseInt(gradeSelect?.value || "10");
+    const targetRow = rows[ens4Grade - 9].querySelectorAll("td");
+
     let filled = 0;
     for (let tri = 0; tri < 3 && filled < 2; tri++) {
-      if (fillNextAvailableBox(grade10[tri], "ENS 4")) {
+      if (fillNextAvailableBox(targetRow[tri], "ENS 4")) {
         filled++;
       }
     }
   }
 }
+
 
 // Utility function to fill next empty textarea in a cell
 function fillNextAvailableBox(cell, text) {

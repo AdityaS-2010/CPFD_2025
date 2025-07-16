@@ -17,7 +17,6 @@ function fillSciencePathway() {
         "AP Biology Seminar"
       ];
       break;
-
     case "option2":
       courses = [
         "Biology of the Living Earth 1",
@@ -28,7 +27,6 @@ function fillSciencePathway() {
         "AP Chemistry Seminar"
       ];
       break;
-
     case "option3":
       courses = [
         "Biology of the Living Earth 1",
@@ -39,7 +37,6 @@ function fillSciencePathway() {
         "AP Biology Seminar"
       ];
       break;
-
     case "option4":
       courses = [
         "Biology of the Living Earth 1",
@@ -50,7 +47,30 @@ function fillSciencePathway() {
         "AP Chemistry Seminar"
       ];
       break;
-
+    case "physics":
+      courses = [
+        "Biology of the Living Earth 1",
+        "Biology of the Living Earth 2",
+        "Physics of the Universe 1",
+        "Physics of the Universe 2",
+        "AP Physics C: Mechanics 1a",
+        "AP Physics C: Mechanics 1b",
+        "AP Physics C: Mechanics Seminar"
+      ];
+      break;
+    case "environmental":
+      courses = [
+        "Biology of the Living Earth 1",
+        "Biology of the Living Earth 2",
+        "Chemistry in the Earth System 1",
+        "Chemistry in the Earth System 2",
+        "AP Environmental Science 1",
+        "AP Environmental Science 2",
+        "AP Environmental Science Seminar"
+      ];
+      break;
+    
+      break;
     default:
       alert("Please select a science pathway option.");
       return;
@@ -58,7 +78,7 @@ function fillSciencePathway() {
 
   let courseIndex = 0;
 
-  // Fill courses one per trimester box, starting with grade 9
+  // Place courses one by one in open boxes starting from 9th grade
   for (let grade = 0; grade < 4; grade++) {
     const tds = planner[grade].querySelectorAll("td");
 
@@ -71,7 +91,7 @@ function fillSciencePathway() {
       for (let box of boxes) {
         if (box.value.trim() === "") {
           box.value = courses[courseIndex++];
-          break;
+          break; // go to next trimester
         }
       }
     }

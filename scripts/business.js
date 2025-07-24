@@ -177,8 +177,8 @@ function fillICTElectives() {
   const table = document.getElementById("plannerBody");
 
   const ictElectives = [
-    "Computer Science & Software Engineering 1",
-    "Computer Science & Software Engineering 2",
+    "Computer Science and Software Engineering 1",
+    "Computer Science and Software Engineering 2",
     "AP Computer Science Principles 1",
     "AP Computer Science Principles 2",
     "Data Structures 1",
@@ -188,8 +188,8 @@ function fillICTElectives() {
   ];
 
   const sequenceMap = {
-    "Computer Science & Software Engineering 1": { grade: 9, trimester: 1 },
-    "Computer Science & Software Engineering 2": { grade: 9, trimester: 2 },
+    "Computer Science and Software Engineering 1": { grade: 9, trimester: 1 },
+    "Computer Science and Software Engineering 2": { grade: 9, trimester: 2 },
 
     "AP Computer Science Principles 1": { grade: 10, trimester: 1 },
     "AP Computer Science Principles 2": { grade: 10, trimester: 2 },
@@ -241,17 +241,17 @@ function fillEducationElectives() {
   const table = document.getElementById("plannerBody");
 
   const educationElectives = [
-    "Child Development & Psychology 1",
-    "Child Development & Psychology 2",
-    "Child Development & Psychology 3",
-    "Child Development & Psychology 4"
+    "Child Development and Psychology 1",
+    "Child Development and Psychology 2",
+    "Child Development and Psychology 3",
+    "Child Development and Psychology 4"
   ];
 
   const sequenceMap = {
-    "Child Development & Psychology 1": { grade: 9, trimester: 1 },
-    "Child Development & Psychology 2": { grade: 9, trimester: 3 },
-    "Child Development & Psychology 3": { grade: 10, trimester: 1 },
-    "Child Development & Psychology 4": { grade: 10, trimester: 3 }
+    "Child Development and Psychology 1": { grade: 9, trimester: 1 },
+    "Child Development and Psychology 2": { grade: 9, trimester: 3 },
+    "Child Development and Psychology 3": { grade: 10, trimester: 1 },
+    "Child Development and Psychology 4": { grade: 10, trimester: 3 }
   };
 
   for (let course of educationElectives) {

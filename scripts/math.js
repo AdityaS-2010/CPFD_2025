@@ -6,34 +6,34 @@ function fillMathPathway() {
 
   const pathways = {
     'Math Accel': [
-      'Math Accel', 'Integrated Math 1a', 'Integrated Math 1b',
+      'Math Accel 1', 'Math Accel 2', 'Integrated Math 1a', 'Integrated Math 1b',
       'Integrated Math 2a', 'Integrated Math 2b', 'Trigonometry',
       'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
-      'AP Calc AB 1', 'AP Calc AB 2', 'Pre-Calc 2'
+      'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2'
     ],
     'Integrated Math 1a': [
       'Integrated Math 1a', 'Integrated Math 1b', 'Integrated Math 2a',
-      'Integrated Math 2b', 'Integrated Math 3a', 'Integrated Math 3b + Pre-Calc 1',
-      'AP Calc AB 1', 'AP Calc AB 2', 'Pre-Calc 2',
-      'Bridge to BC', 'AP Calc BC 1', 'AP Calc BC 2'
+      'Integrated Math 2b', 'Integrated Math 3a', 'Integrated Math 3b',
+      'Pre-Calc 1', 'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
+      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2'
     ],
     'Integrated Math 2a': [
       'Integrated Math 2a', 'Integrated Math 2b', 'Trigonometry',
       'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
-      'AP Calc AB 1', 'AP Calc AB 2', 'Pre-Calc 2',
-      'Bridge to BC', 'AP Calc BC 1', 'AP Calc BC 2'
+      'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
+      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2'
     ],
     'Integrated Math 2b': [
-      'Integrated Math 2b', 'Integrated Math 3a', 'Integrated Math 3b + Pre-Calc 1',
-      'AP Calc AB 1', 'AP Calc AB 2', 'Pre-Calc 2',
-      'Bridge to BC', 'AP Calc BC 1', 'AP Calc BC 2',
-      'AP Stats 1', 'AP Stats 2', 'AP Stats Seminar'
+      'Integrated Math 2b', 'Integrated Math 3a', 'Integrated Math 3b',
+      'Pre-Calc 1', 'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
+      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2',
+      'AP Statistics 1', 'AP Statistics 2', 'AP Statistics Seminar'
     ],
     'Integrated Math 3a': [
       'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
-      'AP Calc AB 1', 'AP Calc AB 2', 'Pre-Calc 2',
-      'Bridge to BC', 'AP Calc BC 1', 'AP Calc BC 2',
-      'AP Stats 1', 'AP Stats 2', 'AP Stats Seminar'
+      'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
+      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2',
+      'AP Statistics 1', 'AP Statistics 2', 'AP Statistics Seminar'
     ]
   };
 

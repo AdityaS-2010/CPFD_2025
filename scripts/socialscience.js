@@ -21,6 +21,7 @@ function fillSocialSciencePathway() {
     // Grade 10
     fillNextAvailableBox(planner[1].querySelectorAll("td")[0], "AP World History 1");
     fillNextAvailableBox(planner[1].querySelectorAll("td")[1], "AP World History 2");
+    fillNextAvailableBox(planner[1].querySelectorAll("td")[2], "World Geography & Cultures");
 
     // Grade 11
     fillNextAvailableBox(planner[2].querySelectorAll("td")[0], "AP US History 1");

@@ -7,7 +7,6 @@ window.courseCatalog = [
 
   { name: "AP World History 1", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: [] },
   { name: "AP World History 2", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["AP World History 1"] },
-
   { name: "World Geography & Cultures", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["AP World History 1", "AP World History 2"] },
 
   { name: "US History 1", grades: [11], ucArea: "A", gradRequirement: "Social Science", prerequisites: [] },

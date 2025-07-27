@@ -17,7 +17,7 @@ function cleanInput(str) {
 }
 
 function getCourseSequence(baseName) {
-  const prefix = baseName.split(" ")[0].toLowerCase();
+  const prefix = baseName.split(" ").slice(0, 2).join(" ").toLowerCase(); // Use first two words as prefix
   const related = courseCatalog.filter(c => c.name.toLowerCase().startsWith(prefix));
   const sequenceSet = new Set();
 
@@ -26,7 +26,9 @@ function getCourseSequence(baseName) {
     if (!course || sequenceSet.has(course.name)) return;
     (course.prerequisites || []).forEach(pr => {
       const prereq = courseCatalog.find(c => c.name === pr);
-      if (prereq) addPrereqsRecursively(prereq);
+      if (prereq && prereq.name.toLowerCase().startsWith(prefix)) {
+        addPrereqsRecursively(prereq); // Only add relevant prerequisites
+      }
     });
     sequenceSet.add(course.name);
   }
@@ -42,8 +44,8 @@ function getCourseSequence(baseName) {
     addedNew = false;
     courseCatalog.forEach(course => {
       const hasMatch = (course.prerequisites || []).some(p => sequenceSet.has(p));
-      if (hasMatch && !sequenceSet.has(course.name)) {
-        sequenceSet.add(course.name);
+      if (hasMatch && !sequenceSet.has(course.name) && course.name.toLowerCase().startsWith(prefix)) {
+        sequenceSet.add(course.name); // Only add relevant descendants
         addedNew = true;
       }
     });
@@ -87,7 +89,7 @@ function getBestCourseMatch(input) {
   const result = fuse.search(cleaned);
 
   // Filter matches by prefix
-  const prefix = cleaned.split(" ")[0];
+  const prefix = cleaned.split(" ").slice(0, 2).join(" ").toLowerCase(); // Use first two words as prefix
   const filteredResult = result.filter(r => r.item.name.toLowerCase().startsWith(prefix));
   if (!filteredResult.length) {
     return null;
@@ -100,7 +102,13 @@ function getBestCourseMatch(input) {
 
   // 3. If course is in a sequence, check for next course
   const sequence = getCourseSequence(baseMatch.name);
-  const remainingSequence = sequence.filter(courseName => !currentCourses.includes(courseName));
+
+  // Refine sequence to only include courses with the same prefix
+  const relatedSequence = sequence.filter(courseName => 
+    courseCatalog.find(c => c.name === courseName)?.name.toLowerCase().startsWith(prefix)
+  );
+
+  const remainingSequence = relatedSequence.filter(courseName => !currentCourses.includes(courseName));
 
   if (remainingSequence.length > 0) {
     const nextName = remainingSequence[0];

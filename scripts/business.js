@@ -319,7 +319,14 @@ function fillAllRequirements() {
   fillSocialSciencePathway();
   fillLanguage();
   fillFineArt();
+
+  
+  
 }
+
+
+
+
 
 
 

@@ -1,27 +1,26 @@
 window.courseCatalog = [
 
   // --- A - Social Science ---
+  { name: "World History 1", grades: [10], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "World History", prerequisites: [] },
+  { name: "World History 2", grades: [10], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "World History", prerequisites: ["World History 1"] },
 
-  { name: "World History 1", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: [] },
-  { name: "World History 2", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["World History 1"] },
+  { name: "AP World History 1", grades: [10], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "World History", prerequisites: [] },
+  { name: "AP World History 2", grades: [10], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "World History", prerequisites: ["AP World History 1"] },
+  { name: "World Geography & Cultures", grades: [10], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "World History", prerequisites: ["AP World History 1", "AP World History 2"] },
 
-  { name: "AP World History 1", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: [] },
-  { name: "AP World History 2", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["AP World History 1"] },
-  { name: "World Geography & Cultures", grades: [10], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["AP World History 1", "AP World History 2"] },
+  { name: "US History 1", grades: [11], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "US History", prerequisites: [] },
+  { name: "US History 2", grades: [11], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "US History", prerequisites: ["US History 1"] },
 
-  { name: "US History 1", grades: [11], ucArea: "A", gradRequirement: "Social Science", prerequisites: [] },
-  { name: "US History 2", grades: [11], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["US History 1"] },
+  { name: "AP US History 1", grades: [11], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "US History", prerequisites: [] },
+  { name: "AP US History 2", grades: [11], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "US History", prerequisites: ["AP US History 1"] },
+  { name: "AP US History Seminar", grades: [11], ucApproved: false, gradRequirement: "Social Science", hsRequirement: "US History", prerequisites: ["AP US History 1", "AP US History 2"] },
 
-  { name: "AP US History 1", grades: [11], ucArea: "A", gradRequirement: "Social Science", prerequisites: [] },
-  { name: "AP US History 2", grades: [11], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["AP US History 1"] },
-  { name: "AP US History Seminar", grades: [11], ucApproved: false, gradRequirement: "Social Science", prerequisites: ["AP US History 1", "AP US History 2"] },
+  { name: "Civics", grades: [12], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "Civics/Economics", prerequisites: ["US History 1", "US History 2"] },
+  { name: "Economics", grades: [12], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "Civics/Economics", prerequisites: ["US History 1", "US History 2"] },
 
-  { name: "Civics", grades: [12], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["US History 1", "US History 2"] },
-  { name: "Economics", grades: [12], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["US History 1", "US History 2"] },
-
-  { name: "AP US Government & Politics 1", grades: [12], ucArea: "A", gradRequirement: "Social Science", prerequisites: [] },
-  { name: "AP US Government & Politics 2", grades: [12], ucArea: "A", gradRequirement: "Social Science", prerequisites: ["AP US Government & Politics 1"] },
-  { name: "AP US Government Seminar", grades: [12], ucApproved: false, gradRequirement: "Social Science", prerequisites: ["AP US Government & Politics 1", "AP US Government & Politics 2"] },
+  { name: "AP US Government & Politics 1", grades: [12], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "Civics/Economics", prerequisites: [] },
+  { name: "AP US Government & Politics 2", grades: [12], ucArea: "A", gradRequirement: "Social Science", hsRequirement: "Civics/Economics", prerequisites: ["AP US Government & Politics 1"] },
+  { name: "AP US Government Seminar", grades: [12], ucApproved: false, gradRequirement: "Social Science", hsRequirement: "Civics/Economics", prerequisites: ["AP US Government & Politics 1", "AP US Government & Politics 2"] },
 
 
 

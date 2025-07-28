@@ -146,17 +146,17 @@
       </select>
   </div>
 
-
-
+  <div id="graduationValidationResults" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;"></div>
 
   <div class="selector-row">
-    <button onclick="fillAllRequirements()">Auto-fill All Required Classes</button>
+    <button onclick="fillAllRequirements(); runGraduationValidation()">Auto-fill All Required Classes</button>
     <button onclick="resetPlanner()">Reset Planner</button>
   </div>
 
-  <button onclick="runValidation()">Validate Credits</button>
+  <button onclick="runGraduationValidation()">Validate Credits</button>
 
-
+  
+  
   <h2>4-Year Course Planner</h2>
   <p>Note: Use "Off-Roll" to indicate free periods. Each class is worth 5 credits unless noted otherwise.</p>
 <p style="color: darkred; font-weight: bold;">
@@ -228,6 +228,12 @@ function resetPlanner() {
     area.style.backgroundColor = ''; // Reset background color
     area.title = ''; // Clear tooltip
   });
+
+  // Clear the validation results
+  const validationContainer = document.getElementById('graduationValidationResults');
+  if (validationContainer) {
+    validationContainer.innerHTML = ''; // Clear the content
+  }
 }
 </script>
 

@@ -4,7 +4,7 @@
 
 const fuse = new Fuse(courseCatalog, {
   keys: ['name'],
-  threshold: 0.35,             
+  threshold: 0.5,             
   includeScore: true,
   ignoreLocation: true,       
   minMatchCharLength: 2       
@@ -17,41 +17,27 @@ function cleanInput(str) {
 }
 
 function getCourseSequence(baseName) {
-  const prefix = baseName.split(" ").slice(0, 2).join(" ").toLowerCase(); // Use first two words as prefix
-  const related = courseCatalog.filter(c => c.name.toLowerCase().startsWith(prefix));
+  const prefixWords = baseName.toLowerCase().split(" ").slice(0, 2).join(" "); // Use first two words as prefix
+  const relatedCourses = courseCatalog.filter(c => c.name.toLowerCase().startsWith(prefixWords)); // Build list based on prefix
   const sequenceSet = new Set();
 
-  // Step 1: Traverse prerequisites up
-  function addPrereqsRecursively(course) {
-    if (!course || sequenceSet.has(course.name)) return;
-    (course.prerequisites || []).forEach(pr => {
-      const prereq = courseCatalog.find(c => c.name === pr);
-      if (prereq && prereq.name.toLowerCase().startsWith(prefix)) {
-        addPrereqsRecursively(prereq); // Only add relevant prerequisites
-      }
-    });
-    sequenceSet.add(course.name);
-  }
+  // Step 1: Add all related courses to the sequence set
+  relatedCourses.forEach(course => sequenceSet.add(course.name));
 
-  const targetCourse = courseCatalog.find(c => c.name.toLowerCase() === baseName.toLowerCase());
-  if (targetCourse) {
-    addPrereqsRecursively(targetCourse);
-  }
-
-  // Step 2: Traverse prerequisites down (find descendants)
+  // Step 2: Traverse prerequisites up and down
   let addedNew;
   do {
     addedNew = false;
     courseCatalog.forEach(course => {
-      const hasMatch = (course.prerequisites || []).some(p => sequenceSet.has(p));
-      if (hasMatch && !sequenceSet.has(course.name) && course.name.toLowerCase().startsWith(prefix)) {
-        sequenceSet.add(course.name); // Only add relevant descendants
+      const hasMatch = (course.prerequisites || []).some(pr => sequenceSet.has(pr));
+      if (hasMatch && !sequenceSet.has(course.name) && course.name.toLowerCase().startsWith(prefixWords)) {
+        sequenceSet.add(course.name); // Add relevant descendants
         addedNew = true;
       }
     });
   } while (addedNew);
 
-  // Step 3: Sort by prereq chain
+  // Step 3: Sort courses by prerequisites
   const sorted = [];
   const added = new Set();
   function sortRecursive(course) {
@@ -66,13 +52,10 @@ function getCourseSequence(baseName) {
 
   [...sequenceSet].map(name => courseCatalog.find(c => c.name === name)).forEach(sortRecursive);
 
-  // Step 4: Filter courses by prefix
-  const finalSequence = sorted.filter(name => name.toLowerCase().startsWith(prefix));
-
   // Log the sequence for debugging
-  console.log(`Sequence for "${baseName}":`, finalSequence);
+  console.log(`Sequence for "${baseName}":`, sorted);
 
-  return finalSequence;
+  return sorted;
 }
 
 
@@ -81,47 +64,28 @@ function getBestCourseMatch(input) {
   const cleaned = cleanInput(input);
   if (!cleaned) return null;
 
-  // 0. Check for exact match FIRST
-  const exact = courseCatalog.find(c => cleanInput(c.name) === cleaned);
-  if (exact) return exact;
+  // Build the sequence based on the prefix
+  const sequence = getCourseSequence(cleaned);
 
-  // 1. Fuzzy match if no exact match
-  const result = fuse.search(cleaned);
-
-  // Filter matches by prefix
-  const prefix = cleaned.split(" ").slice(0, 2).join(" ").toLowerCase(); // Use first two words as prefix
-  const filteredResult = result.filter(r => r.item.name.toLowerCase().startsWith(prefix));
-  if (!filteredResult.length) {
-    return null;
-  }
-
-  const baseMatch = filteredResult[0].item;
-
-  // 2. Get all courses currently in planner
+  // Get all courses currently in the planner
   const currentCourses = getAllCoursesInPlanner();
 
-  // 3. If course is in a sequence, check for next course
-  const sequence = getCourseSequence(baseMatch.name);
-
-  // Refine sequence to only include courses with the same prefix
-  const relatedSequence = sequence.filter(courseName => 
-    courseCatalog.find(c => c.name === courseName)?.name.toLowerCase().startsWith(prefix)
-  );
-
-  const remainingSequence = relatedSequence.filter(courseName => !currentCourses.includes(courseName));
+  // Find the next course in the sequence that is not already in the planner
+  const remainingSequence = sequence.filter(courseName => !currentCourses.includes(courseName));
 
   if (remainingSequence.length > 0) {
     const nextName = remainingSequence[0];
-    return courseCatalog.find(c => c.name === nextName) || baseMatch;
+    return courseCatalog.find(c => c.name === nextName) || null;
   }
 
-  return baseMatch;
+  return null; // No matching course found
 }
 
 
 
 // Automatically correct input fields in the table
 function monitorTableInputs() {
+  
   const table = document.querySelector("table"); // Adjust selector if needed
   if (!table) return;
 

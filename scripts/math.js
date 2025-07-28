@@ -6,7 +6,7 @@ function fillMathPathway() {
 
   const pathways = {
     'Math Accel': [
-      'Math Accel 1', 'Math Accel 2', 'Integrated Math 1a', 'Integrated Math 1b',
+      'Math Accel 1', 'Integrated Math 1a', 'Integrated Math 1b',
       'Integrated Math 2a', 'Integrated Math 2b', 'Trigonometry',
       'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
       'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2'

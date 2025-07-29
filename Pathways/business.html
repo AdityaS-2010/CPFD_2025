@@ -146,14 +146,17 @@
       </select>
   </div>
 
-  <div id="graduationValidationResults" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;"></div>
+  <div id="validationWrapper" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+    <div id="graduationValidationResults" style="flex: 1 1 300px;"></div>
+    <div id="ucValidationResults" style="flex: 1 1 300px;"></div>
+  </div>
 
   <div class="selector-row">
-    <button onclick="fillAllRequirements(); runGraduationValidation()">Auto-fill All Required Classes</button>
+    <button onclick="fillAllRequirements()">Auto-fill All Required Classes</button>
     <button onclick="resetPlanner()">Reset Planner</button>
   </div>
 
-  <button onclick="runGraduationValidation()">Validate Credits</button>
+  <button onclick="runValidation()">Validate Credits</button>
 
   
   
@@ -229,10 +232,16 @@ function resetPlanner() {
     area.title = ''; // Clear tooltip
   });
 
-  // Clear the validation results
-  const validationContainer = document.getElementById('graduationValidationResults');
-  if (validationContainer) {
-    validationContainer.innerHTML = ''; // Clear the content
+  // Clear the graduation validation results
+  const graduationContainer = document.getElementById('graduationValidationResults');
+  if (graduationContainer) {
+    graduationContainer.innerHTML = ''; // Clear the content
+  }
+
+  // Clear the UC validation results
+  const ucContainer = document.getElementById('ucValidationResults');
+  if (ucContainer) {
+    ucContainer.innerHTML = ''; // Clear the content
   }
 }
 </script>

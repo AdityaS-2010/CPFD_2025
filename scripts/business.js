@@ -320,8 +320,9 @@ function fillAllRequirements() {
   fillLanguage();
   fillFineArt();
 
-  
-  
+  // Run validations after auto-filling
+  runGraduationValidation();
+  runUCValidation();
 }
 
 

@@ -4,7 +4,7 @@ function fillLanguage() {
   const startLevel = parseInt(document.getElementById("langStartLevel").value);
   const rows = document.querySelectorAll("#plannerBody tr");
 
-  if (outside) return;
+  if (outside) return [];
 
   let sequence = [];
 
@@ -29,11 +29,12 @@ function fillLanguage() {
       "AP Chinese Language 2",
       "AP Chinese Language Seminar"
     ];
+  } else {
+    return [];
   }
 
   let startIndex = (startLevel - 1);
   let classes = [];
-
   for (let i = 0; i < 4; i++) {
     let idx = startIndex + i;
     if (idx < sequence.length) {
@@ -42,6 +43,9 @@ function fillLanguage() {
       break; // stop if we hit the end
     }
   }
+
+  // Build triedCourses: all classes we attempted to place
+  const triedCourses = [...classes];
 
   let courseIndex = 0;
   for (let grade = 0; grade < 4; grade++) {
@@ -52,14 +56,16 @@ function fillLanguage() {
       for (let box of boxes) {
         if (box.value.trim() === "") {
           if (courseIndex < classes.length) {
-            box.value = classes[courseIndex++];
+            box.value = classes[courseIndex];
+            courseIndex++;
           } else {
-            return; // done placing courses
+            return triedCourses; // done placing courses
           }
           break;
         }
       }
-      if (courseIndex >= classes.length) return;
+      if (courseIndex >= classes.length) return triedCourses;
     }
   }
+  return triedCourses;
 }

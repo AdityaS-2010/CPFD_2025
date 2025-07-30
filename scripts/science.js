@@ -69,31 +69,32 @@ function fillSciencePathway() {
         "AP Environmental Science Seminar"
       ];
       break;
-    
-      break;
     default:
       alert("Please select a science pathway option.");
-      return;
+      return [];
   }
 
   let courseIndex = 0;
+  const triedCourses = [...courses];
 
   // Place courses one by one in open boxes starting from 9th grade
   for (let grade = 0; grade < 4; grade++) {
     const tds = planner[grade].querySelectorAll("td");
 
     for (let tri = 0; tri < 3; tri++) {
-      if (courseIndex >= courses.length) return;
+      if (courseIndex >= courses.length) return triedCourses;
 
       const cell = tds[tri];
       const boxes = cell.querySelectorAll("textarea");
 
       for (let box of boxes) {
         if (box.value.trim() === "") {
-          box.value = courses[courseIndex++];
+          box.value = courses[courseIndex];
+          courseIndex++;
           break; // go to next trimester
         }
       }
     }
   }
+  return triedCourses;
 }

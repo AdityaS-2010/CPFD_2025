@@ -39,6 +39,7 @@ function fillMathPathway() {
 
   const courses = pathways[mathStart];
   let courseIndex = 0;
+  const triedCourses = [];
 
   // Loop through each grade (row)
   for (let i = 0; i < 4 && courseIndex < courses.length; i++) {
@@ -56,6 +57,7 @@ function fillMathPathway() {
       if (boxIdx >= boxes.length) continue; // No space in this trimester
 
       const course = courses[courseIndex];
+      triedCourses.push(course);
 
       if (course.includes('+')) {
         // Special case: fill two boxes in the same trimester
@@ -71,8 +73,12 @@ function fillMathPathway() {
             }
           }
         }
-        if (firstBox !== -1) boxes[firstBox].value = c1;
-        if (secondBox !== -1) boxes[secondBox].value = c2;
+        if (firstBox !== -1) {
+          boxes[firstBox].value = c1;
+        }
+        if (secondBox !== -1) {
+          boxes[secondBox].value = c2;
+        }
         // If only one box available, fill c1 and skip c2
         courseIndex++;
       } else {
@@ -81,4 +87,5 @@ function fillMathPathway() {
       }
     }
   }
+  return triedCourses;
 }

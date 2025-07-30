@@ -1,12 +1,14 @@
 function fillFineArt() {
   const fineArtTrackElem = document.getElementById("fineArtTrack");
-  if (!fineArtTrackElem) return;
+  if (!fineArtTrackElem) return [];
 
   const fineArtTrack = fineArtTrackElem.value;
-  if (fineArtTrack === "None") return;
+  if (fineArtTrack === "None") return [];
 
   const plannerRows = document.querySelectorAll("#plannerBody tr");
-  if (!plannerRows.length) return;
+  if (!plannerRows.length) return [];
+
+  const triedCourses = [];
 
   // -------------------------------
   // Non-AP Tracks Logic
@@ -27,16 +29,16 @@ function fillFineArt() {
 
   if (nonAPTracks[fineArtTrack]) {
     const sequence = nonAPTracks[fineArtTrack];
+    sequence.forEach(course => triedCourses.push(course));
 
     // Try 11th first, then 12th
     const gradeIndicesToTry = [2, 3];
 
+    let placed = 0;
     for (let gradeIndex of gradeIndicesToTry) {
       let row = plannerRows[gradeIndex];
       let cells = row.querySelectorAll("td");
       if (!cells.length) continue;
-
-      let placed = 0;
 
       for (let t = 0; t < 3; t++) {
         if (placed >= sequence.length) break;
@@ -53,10 +55,10 @@ function fillFineArt() {
         }
       }
 
-      if (placed === sequence.length) return;
+      if (placed === sequence.length) return triedCourses;
     }
 
-    return;
+    return triedCourses;
   }
 
   // -------------------------------
@@ -72,6 +74,7 @@ function fillFineArt() {
 
   if (apTracks[fineArtTrack]) {
     const sequence = apTracks[fineArtTrack];
+    sequence.forEach(course => triedCourses.push(course));
 
     const tryGrade = (gradeIndex) => {
       const tds = plannerRows[gradeIndex].querySelectorAll("td");
@@ -90,10 +93,12 @@ function fillFineArt() {
       return false;
     };
 
-    if (tryGrade(2)) return;
-    if (tryGrade(3)) return;
+    if (tryGrade(2)) return triedCourses;
+    if (tryGrade(3)) return triedCourses;
 
     alert(`⚠ No space in 11th or 12th grade for ${fineArtTrack}. Please adjust your schedule manually.`);
-    return;
+    return triedCourses;
   }
+
+  return triedCourses;
 }

@@ -2,15 +2,19 @@
 
 function fillPE() {
   const sportChoice = document.getElementById("playSport");
-  if (!sportChoice) return;
+  if (!sportChoice) return [];
 
   const playsSport = sportChoice.value === "yes";
   const rows = document.querySelectorAll("#plannerBody tr");
+  const triedCourses = [];
 
   // ENS 1–3 go in 9th grade
   const grade9 = rows[0].querySelectorAll("td");
+  triedCourses.push("ENS 1");
   fillNextAvailableBox(grade9[0], "ENS 1"); // Tri 1
+  triedCourses.push("ENS 2");
   fillNextAvailableBox(grade9[1], "ENS 2"); // Tri 2
+  triedCourses.push("ENS 3");
   fillNextAvailableBox(grade9[2], "ENS 3"); // Tri 3
 
   if (!playsSport) {
@@ -21,13 +25,15 @@ function fillPE() {
 
     let filled = 0;
     for (let tri = 0; tri < 3 && filled < 2; tri++) {
+      triedCourses.push("ENS 4");
       if (fillNextAvailableBox(targetRow[tri], "ENS 4")) {
         filled++;
       }
     }
   }
-}
 
+  return triedCourses;
+}
 
 // Utility function to fill next empty textarea in a cell
 function fillNextAvailableBox(cell, text) {

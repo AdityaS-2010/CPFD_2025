@@ -18,7 +18,6 @@ function extractPlannerData() {
   const plannerBody = document.getElementById("plannerBody");
   const rows = plannerBody.querySelectorAll("tr");
   const planner = {};
-
   rows.forEach(row => {
     const grade = row.querySelector("th").textContent.trim();
     const textareas = row.querySelectorAll("textarea");
@@ -60,10 +59,14 @@ function compareCourses(selectedCourses, planner) {
   });
 
   // For your use case, overriddenCourses is the same as missingCourses
-  // (since if a course couldn't be placed, it's missing)
+  const overriddenCourses = missingCourses;
+
+  // Debug log for overridden classes
+  console.log("Overridden Classes:", overriddenCourses);
+
   return { 
     missingCourses, 
-    overriddenCourses: missingCourses 
+    overriddenCourses
   };
 }
 
@@ -75,15 +78,24 @@ function sendPlannerToAPI(dropdownSelections, planner, missingCourses, overridde
     overriddenCourses
   };
 
-  // Log the data instead of sending it to the API
-  console.log("Data to be sent to API:", JSON.stringify(requestData, null, 2));
-
-  // Simulate an API response for testing
-  return new Promise(resolve => {
-    setTimeout(() => {
-      console.log("Simulated API response received.");
-      resolve(planner); // Return the same planner for now
-    }, 1000);
+  // Call your backend API instead of httpbin
+  return fetch('http://localhost:3000/api/optimize-planner', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(requestData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("API response received:", data);
+    // If the response contains optimizedPlanner, update the planner
+    if (data.optimizedPlanner) {
+      updatePlanner(data.optimizedPlanner);
+    }
+    return data;
+  })
+  .catch(error => {
+    console.error("API error:", error);
+    return null;
   });
 }
 
@@ -116,3 +128,4 @@ function updatePlanner(optimizedPlanner) {
 }
 
 export { extractDropdownSelections, extractPlannerData, compareCourses, sendPlannerToAPI, updatePlanner };
+window.sendPlannerToAPI = sendPlannerToAPI;

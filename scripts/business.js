@@ -1,284 +1,200 @@
 // Import the necessary functions from plannerExtractor.js
 import { extractDropdownSelections, extractPlannerData, compareCourses, sendPlannerToAPI, updatePlanner } from './plannerExtractor.js';
 
-function fillBusinessElectives() {
+function placeElectiveSequence(sequence, allowedGrades) {
   const table = document.getElementById("plannerBody");
-  const businessElectives = [
-    "Marketing Economics 1",
-    "Marketing Economics 2",
-    "Business Law 1",
-    "Business Law 2",
-    "Introduction to Finance 1",
-    "Introduction to Finance 2"
-  ];
-  const sequenceMap = {
-    "Marketing Economics 1": { grade: 9, trimester: 1 },
-    "Marketing Economics 2": { grade: 9, trimester: 3 },
-    "Business Law 1": { grade: 10, trimester: 1 },
-    "Business Law 2": { grade: 10, trimester: 3 },
-    "Introduction to Finance 1": { grade: 11, trimester: 1 },
-    "Introduction to Finance 2": { grade: 11, trimester: 3 }
-  };
-  const triedCourses = [];
-  for (let course of businessElectives) {
-    triedCourses.push(course);
-    const pref = sequenceMap[course];
-    const rowIndex = pref.grade - 9;
-    let placed = false;
-    // Preferred cell first
-    const cell = table.rows[rowIndex].cells[pref.trimester];
-    placed = fillNextAvailableBox(cell, course);
-    // Try other trimesters same grade
-    if (!placed) {
+  let placedCourses = [];
+  for (let gradeIdx = 0; gradeIdx < allowedGrades.length; gradeIdx++) {
+    const grade = allowedGrades[gradeIdx];
+    const rowIndex = grade - 9;
+    let cells = table.rows[rowIndex].cells;
+    let placed = 0;
+
+    // Try to place each course in the first available box in any trimester
+    for (let seqIdx = 0; seqIdx < sequence.length; seqIdx++) {
+      let filled = false;
       for (let t = 0; t < 3; t++) {
-        if (t === pref.trimester) continue;
-        const otherCell = table.rows[rowIndex].cells[t];
-        if (fillNextAvailableBox(otherCell, course)) {
-          placed = true;
+        if (fillNextAvailableBox(cells[t], sequence[seqIdx])) {
+          placedCourses.push(sequence[seqIdx]);
+          filled = true;
           break;
         }
       }
+      if (!filled) break; // If can't place, stop trying in this grade
     }
-    // Try other grades
-    if (!placed) {
-      for (let g = rowIndex + 1; g < 4; g++) {
-        for (let t = 0; t < 3; t++) {
-          const fallbackCell = table.rows[g].cells[t];
-          if (fillNextAvailableBox(fallbackCell, course)) {
-            placed = true;
-            break;
-          }
-        }
-        if (placed) break;
-      }
-    }
+    // If all courses placed, break out of allowedGrades loop
+    if (placedCourses.length === sequence.length) break;
+    else placedCourses = []; // Reset if not all placed in this grade
   }
+  return placedCourses;
+}
+
+function fillBusinessElectives() {
+  const planner = document.querySelectorAll("#plannerBody tr");
+  const triedCourses = [];
+
+  // 9th Grade
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[0], "Marketing Economics 1")) {
+    triedCourses.push("Marketing Economics 1");
+  }
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[1], "Marketing Economics 2")) {
+    triedCourses.push("Marketing Economics 2");
+  }
+
+  // 10th Grade
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[0], "Business Law 1")) {
+    triedCourses.push("Business Law 1");
+  }
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[1], "Business Law 2")) {
+    triedCourses.push("Business Law 2");
+  }
+
+  // 11th Grade
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[0], "Introduction to Finance 1")) {
+    triedCourses.push("Introduction to Finance 1");
+  }
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[1], "Introduction to Finance 2")) {
+    triedCourses.push("Introduction to Finance 2");
+  }
+
+  // Optionally, repeat for 12th grade if needed
+
   return triedCourses;
 }
 
 function fillEngineeringElectives() {
-  const table = document.getElementById("plannerBody");
-  const engineeringElectives = [
-    "Introduction to Engineering Design 1",
-    "Introduction to Engineering Design 2",
-    "Robotics 1",
-    "Robotics 2",
-    "Honors Principles of Engineering 1",
-    "Honors Principles of Engineering 2"
-  ];
-  const sequenceMap = {
-    "Introduction to Engineering Design 1": { grade: 9, trimester: 1 },
-    "Introduction to Engineering Design 2": { grade: 9, trimester: 3 },
-    "Robotics 1": { grade: 10, trimester: 1 },
-    "Robotics 2": { grade: 10, trimester: 3 },
-    "Honors Principles of Engineering 1": { grade: 11, trimester: 1 },
-    "Honors Principles of Engineering 2": { grade: 11, trimester: 3 }
-  };
+  const planner = document.querySelectorAll("#plannerBody tr");
   const triedCourses = [];
-  for (let course of engineeringElectives) {
-    triedCourses.push(course);
-    const pref = sequenceMap[course];
-    const rowIndex = pref.grade - 9;
-    let placed = false;
-    // Preferred cell first
-    const cell = table.rows[rowIndex].cells[pref.trimester];
-    placed = fillNextAvailableBox(cell, course);
-    // Try other trimesters in same grade
-    if (!placed) {
-      for (let t = 0; t < 3; t++) {
-        if (t === pref.trimester) continue;
-        const otherCell = table.rows[rowIndex].cells[t];
-        if (fillNextAvailableBox(otherCell, course)) {
-          placed = true;
-          break;
-        }
-      }
-    }
-    // Try lower grades
-    if (!placed) {
-      for (let g = rowIndex + 1; g < 4; g++) {
-        for (let t = 0; t < 3; t++) {
-          const fallbackCell = table.rows[g].cells[t];
-          if (fillNextAvailableBox(fallbackCell, course)) {
-            placed = true;
-            break;
-          }
-        }
-        if (placed) break;
-      }
-    }
+
+  // 9th Grade
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[0], "Introduction to Engineering Design 1")) {
+    triedCourses.push("Introduction to Engineering Design 1");
   }
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[1], "Introduction to Engineering Design 2")) {
+    triedCourses.push("Introduction to Engineering Design 2");
+  }
+
+  // 10th Grade
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[0], "Robotics 1")) {
+    triedCourses.push("Robotics 1");
+  }
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[1], "Robotics 2")) {
+    triedCourses.push("Robotics 2");
+  }
+
+  // 11th Grade
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[0], "Honors Principles of Engineering 1")) {
+    triedCourses.push("Honors Principles of Engineering 1");
+  }
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[1], "Honors Principles of Engineering 2")) {
+    triedCourses.push("Honors Principles of Engineering 2");
+  }
+
+  // Optionally, repeat for 12th grade if needed
+
   return triedCourses;
 }
 
 function fillBiomedElectives() {
-  const table = document.getElementById("plannerBody");
-  const biomedElectives = [
-    "Principles of Biomedical Sciences 1",
-    "Principles of Biomedical Sciences 2",
-    "Human Body Systems 1",
-    "Human Body Systems 2",
-    "Honors Medical Interventions 1",
-    "Honors Medical Interventions 2"
-  ];
-  const sequenceMap = {
-    "Principles of Biomedical Sciences 1": { grade: 9, trimester: 1 },
-    "Principles of Biomedical Sciences 2": { grade: 9, trimester: 3 },
-    "Human Body Systems 1": { grade: 10, trimester: 1 },
-    "Human Body Systems 2": { grade: 10, trimester: 3 },
-    "Honors Medical Interventions 1": { grade: 11, trimester: 1 },
-    "Honors Medical Interventions 2": { grade: 11, trimester: 3 }
-  };
+  const planner = document.querySelectorAll("#plannerBody tr");
   const triedCourses = [];
-  for (let course of biomedElectives) {
-    triedCourses.push(course);
-    const pref = sequenceMap[course];
-    const rowIndex = pref.grade - 9;
-    let placed = false;
-    // Preferred cell first
-    const cell = table.rows[rowIndex].cells[pref.trimester];
-    placed = fillNextAvailableBox(cell, course);
-    // Try other trimesters same grade
-    if (!placed) {
-      for (let t = 0; t < 3; t++) {
-        if (t === pref.trimester) continue;
-        const otherCell = table.rows[rowIndex].cells[t];
-        if (fillNextAvailableBox(otherCell, course)) {
-          placed = true;
-          break;
-        }
-      }
-    }
-    // Try later grades
-    if (!placed) {
-      for (let g = rowIndex + 1; g < 4; g++) {
-        for (let t = 0; t < 3; t++) {
-          const fallbackCell = table.rows[g].cells[t];
-          if (fillNextAvailableBox(fallbackCell, course)) {
-            placed = true;
-            break;
-          }
-        }
-        if (placed) break;
-      }
-    }
+
+  // 9th Grade
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[0], "Principles of Biomedical Sciences 1")) {
+    triedCourses.push("Principles of Biomedical Sciences 1");
   }
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[1], "Principles of Biomedical Sciences 2")) {
+    triedCourses.push("Principles of Biomedical Sciences 2");
+  }
+
+  // 10th Grade
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[0], "Human Body Systems 1")) {
+    triedCourses.push("Human Body Systems 1");
+  }
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[1], "Human Body Systems 2")) {
+    triedCourses.push("Human Body Systems 2");
+  }
+
+  // 11th Grade
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[0], "Honors Medical Interventions 1")) {
+    triedCourses.push("Honors Medical Interventions 1");
+  }
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[1], "Honors Medical Interventions 2")) {
+    triedCourses.push("Honors Medical Interventions 2");
+  }
+
+  // Optionally, repeat for 12th grade if needed
+
   return triedCourses;
 }
 
 function fillICTElectives() {
-  const table = document.getElementById("plannerBody");
-  const ictElectives = [
-    "Computer Science and Software Engineering 1",
-    "Computer Science and Software Engineering 2",
-    "AP Computer Science Principles 1",
-    "AP Computer Science Principles 2",
-    "Data Structures 1",
-    "AP Computer Science A 1",
-    "AP Computer Science A 2",
-    "Data Structures 2"
-  ];
-  const sequenceMap = {
-    "Computer Science and Software Engineering 1": { grade: 9, trimester: 1 },
-    "Computer Science and Software Engineering 2": { grade: 9, trimester: 2 },
-    "AP Computer Science Principles 1": { grade: 10, trimester: 1 },
-    "AP Computer Science Principles 2": { grade: 10, trimester: 2 },
-    "Data Structures 1": { grade: 10, trimester: 3 },
-    "AP Computer Science A 1": { grade: 11, trimester: 1 },
-    "AP Computer Science A 2": { grade: 11, trimester: 2 },
-    "Data Structures 2": { grade: 11, trimester: 3 }
-  };
+  const planner = document.querySelectorAll("#plannerBody tr");
   const triedCourses = [];
-  for (let course of ictElectives) {
-    triedCourses.push(course);
-    const pref = sequenceMap[course];
-    const rowIndex = pref.grade - 9;
-    let placed = false;
-    // Preferred cell first
-    const cell = table.rows[rowIndex].cells[pref.trimester];
-    placed = fillNextAvailableBox(cell, course);
-    // Try other trimesters in same grade
-    if (!placed) {
-      for (let t = 0; t < 3; t++) {
-        if (t === pref.trimester) continue;
-        const otherCell = table.rows[rowIndex].cells[t];
-        if (fillNextAvailableBox(otherCell, course)) {
-          placed = true;
-          break;
-        }
-      }
-    }
-    // Try lower grades
-    if (!placed) {
-      for (let g = rowIndex + 1; g < 4; g++) {
-        for (let t = 0; t < 3; t++) {
-          const fallbackCell = table.rows[g].cells[t];
-          if (fillNextAvailableBox(fallbackCell, course)) {
-            placed = true;
-            break;
-          }
-        }
-        if (placed) break;
-      }
-    }
+
+  // 9th Grade
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[0], "Computer Science and Software Engineering 1")) {
+    triedCourses.push("Computer Science and Software Engineering 1");
   }
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[1], "Computer Science and Software Engineering 2")) {
+    triedCourses.push("Computer Science and Software Engineering 2");
+  }
+
+  // 10th Grade
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[0], "AP Computer Science Principles 1")) {
+    triedCourses.push("AP Computer Science Principles 1");
+  }
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[1], "AP Computer Science Principles 2")) {
+    triedCourses.push("AP Computer Science Principles 2");
+  }
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[2], "Data Structures 1")) {
+    triedCourses.push("Data Structures 1");
+  }
+
+  // 11th Grade
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[0], "AP Computer Science A 1")) {
+    triedCourses.push("AP Computer Science A 1");
+  }
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[1], "AP Computer Science A 2")) {
+    triedCourses.push("AP Computer Science A 2");
+  }
+  if (fillNextAvailableBox(planner[2].querySelectorAll('td')[2], "Data Structures 2")) {
+    triedCourses.push("Data Structures 2");
+  }
+
+  // Optionally, repeat for 12th grade if needed
+
   return triedCourses;
 }
 
 function fillEducationElectives() {
-  const table = document.getElementById("plannerBody");
-  const educationElectives = [
-    "Child Development and Psychology 1",
-    "Child Development and Psychology 2",
-    "Child Development and Psychology 3",
-    "Child Development and Psychology 4"
-  ];
-  const sequenceMap = {
-    "Child Development and Psychology 1": { grade: 9, trimester: 1 },
-    "Child Development and Psychology 2": { grade: 9, trimester: 3 },
-    "Child Development and Psychology 3": { grade: 10, trimester: 1 },
-    "Child Development and Psychology 4": { grade: 10, trimester: 3 }
-  };
+  const planner = document.querySelectorAll("#plannerBody tr");
   const triedCourses = [];
-  for (let course of educationElectives) {
-    triedCourses.push(course);
-    const pref = sequenceMap[course];
-    const rowIndex = pref.grade - 9;
-    let placed = false;
-    // Preferred cell first
-    const cell = table.rows[rowIndex].cells[pref.trimester];
-    placed = fillNextAvailableBox(cell, course);
-    // Try other trimesters same grade
-    if (!placed) {
-      for (let t = 0; t < 3; t++) {
-        if (t === pref.trimester) continue;
-        const otherCell = table.rows[rowIndex].cells[t];
-        if (fillNextAvailableBox(otherCell, course)) {
-          placed = true;
-          break;
-        }
-      }
-    }
-    // Try later grades
-    if (!placed) {
-      for (let g = rowIndex + 1; g < 4; g++) {
-        for (let t = 0; t < 3; t++) {
-          const fallbackCell = table.rows[g].cells[t];
-          if (fillNextAvailableBox(fallbackCell, course)) {
-            placed = true;
-            break;
-          }
-        }
-        if (placed) break;
-      }
-    }
+
+  // 9th Grade
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[0], "Child Development and Psychology 1")) {
+    triedCourses.push("Child Development and Psychology 1");
   }
+  if (fillNextAvailableBox(planner[0].querySelectorAll('td')[1], "Child Development and Psychology 2")) {
+    triedCourses.push("Child Development and Psychology 2");
+  }
+
+  // 10th Grade
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[0], "Child Development and Psychology 3")) {
+    triedCourses.push("Child Development and Psychology 3");
+  }
+  if (fillNextAvailableBox(planner[1].querySelectorAll('td')[1], "Child Development and Psychology 4")) {
+    triedCourses.push("Child Development and Psychology 4");
+  }
+
+  // Optionally, repeat for 11th/12th grade if needed
+
   return triedCourses;
 }
 
 // Updated fillAllRequirements function
 function fillAllRequirements() {
-  const peCourses = fillPE();
+  const peCourses = fillPE(); // ENS 1–3 only
   const mathCourses = fillMathPathway();
   const englishCourses = fillEnglishPathway();
   const scienceCourses = fillSciencePathway();
@@ -303,8 +219,12 @@ function fillAllRequirements() {
       break;
   }
   const socialScienceCourses = fillSocialSciencePathway();
+  const ens4Courses = fillENS4();
   const languageCourses = fillLanguage();
   const fineArtCourses = fillFineArt();
+
+
+
 
   // Extract dropdown selections and planner data
   const dropdownSelections = extractDropdownSelections();
@@ -312,7 +232,7 @@ function fillAllRequirements() {
 
   // Use the actual placed courses
   const selectedCourses = {
-    peCourses,
+    peCourses: [...peCourses, ...ens4Courses],
     mathCourses,
     englishCourses,
     scienceCourses,
@@ -326,10 +246,10 @@ function fillAllRequirements() {
   const { missingCourses, overriddenCourses } = compareCourses(selectedCourses, planner);
 
   // Send data to API and update planner with the response
-  sendPlannerToAPI(dropdownSelections, planner, missingCourses, overriddenCourses)
-    .then(optimizedPlanner => {
-      updatePlanner(optimizedPlanner);
-    });
+  //sendPlannerToAPI(dropdownSelections, planner, missingCourses, overriddenCourses)
+  //  .then(optimizedPlanner => {
+  //    updatePlanner(optimizedPlanner);
+  //  });
 
   // Run validations after auto-filling
   runGraduationValidation();

@@ -3,89 +3,178 @@
 function fillMathPathway() {
   const mathStart = document.getElementById('mathStart').value;
   const planner = document.querySelectorAll('#plannerBody tr');
-
-  const pathways = {
-    'Math Accel': [
-      'Math Accel 1', 'Integrated Math 1a', 'Integrated Math 1b',
-      'Integrated Math 2a', 'Integrated Math 2b', 'Trigonometry',
-      'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
-      'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2'
-    ],
-    'Integrated Math 1a': [
-      'Integrated Math 1a', 'Integrated Math 1b', 'Integrated Math 2a',
-      'Integrated Math 2b', 'Integrated Math 3a', 'Integrated Math 3b',
-      'Pre-Calc 1', 'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
-      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2'
-    ],
-    'Integrated Math 2a': [
-      'Integrated Math 2a', 'Integrated Math 2b', 'Trigonometry',
-      'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
-      'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
-      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2'
-    ],
-    'Integrated Math 2b': [
-      'Integrated Math 2b', 'Integrated Math 3a', 'Integrated Math 3b',
-      'Pre-Calc 1', 'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
-      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2',
-      'AP Statistics 1', 'AP Statistics 2', 'AP Statistics Seminar'
-    ],
-    'Integrated Math 3a': [
-      'Integrated Math 3a', 'Integrated Math 3b', 'Pre-Calc 1',
-      'AP Calculus AB 1', 'AP Calculus AB 2', 'Pre-Calc 2',
-      'Bridge to AP Calculus BC', 'AP Calculus BC 1', 'AP Calculus BC 2',
-      'AP Statistics 1', 'AP Statistics 2', 'AP Statistics Seminar'
-    ]
-  };
-
-  const courses = pathways[mathStart];
-  let courseIndex = 0;
   const triedCourses = [];
 
-  // Loop through each grade (row)
-  for (let i = 0; i < 4 && courseIndex < courses.length; i++) {
-    const tds = planner[i].querySelectorAll('td');
-    // Loop through each trimester (cell)
-    for (let j = 0; j < 3 && courseIndex < courses.length; j++) {
-      const cell = tds[j];
-      const boxes = cell.querySelectorAll('textarea');
-
-      // Find the next available box in this trimester
-      let boxIdx = 0;
-      while (boxIdx < boxes.length && boxes[boxIdx].value.trim() !== '') {
-        boxIdx++;
-      }
-      if (boxIdx >= boxes.length) continue; // No space in this trimester
-
-      const course = courses[courseIndex];
-      triedCourses.push(course);
-
-      if (course.includes('+')) {
-        // Special case: fill two boxes in the same trimester
-        const [c1, c2] = course.split('+').map(s => s.trim());
-        // Find two available boxes
-        let firstBox = -1, secondBox = -1;
-        for (let b = 0; b < boxes.length; b++) {
-          if (boxes[b].value.trim() === '') {
-            if (firstBox === -1) firstBox = b;
-            else if (secondBox === -1) {
-              secondBox = b;
-              break;
-            }
-          }
-        }
-        if (firstBox !== -1) {
-          boxes[firstBox].value = c1;
-        }
-        if (secondBox !== -1) {
-          boxes[secondBox].value = c2;
-        }
-        // If only one box available, fill c1 and skip c2
-        courseIndex++;
-      } else {
-        boxes[boxIdx].value = course;
-        courseIndex++;
+  // Utility function to fill next empty textarea in a cell
+  function fillNextAvailableBox(cell, text) {
+    const boxes = cell.querySelectorAll("textarea");
+    for (let box of boxes) {
+      if (box.value.trim() === "") {
+        box.value = text;
+        return true;
       }
     }
+    return false;
   }
+
+  if (mathStart === 'Math Accel') {
+    // 9th Grade
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[0], 'Math Accel 1');
+    triedCourses.push('Math Accel 1');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[1], 'Integrated Math 1a');
+    triedCourses.push('Integrated Math 1a');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[2], 'Integrated Math 1b');
+    triedCourses.push('Integrated Math 1b');
+    // 10th Grade
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[0], 'Integrated Math 2a');
+    triedCourses.push('Integrated Math 2a');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[1], 'Integrated Math 2b');
+    triedCourses.push('Integrated Math 2b');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[2], 'Trigonometry');
+    triedCourses.push('Trigonometry');
+    // 11th Grade
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[0], 'Integrated Math 3a');
+    triedCourses.push('Integrated Math 3a');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[1], 'Integrated Math 3b');
+    triedCourses.push('Integrated Math 3b');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[2], 'Pre-Calc 1');
+    triedCourses.push('Pre-Calc 1');
+    // 12th Grade
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[0], 'AP Calculus AB 1');
+    triedCourses.push('AP Calculus AB 1');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[1], 'AP Calculus AB 2');
+    triedCourses.push('AP Calculus AB 2');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[2], 'Pre-Calc 2');
+    triedCourses.push('Pre-Calc 2');
+  }
+
+  else if (mathStart === 'Integrated Math 1a') {
+    // 9th Grade
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[0], 'Integrated Math 1a');
+    triedCourses.push('Integrated Math 1a');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[1], 'Integrated Math 1b');
+    triedCourses.push('Integrated Math 1b');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[2], 'Integrated Math 2a');
+    triedCourses.push('Integrated Math 2a');
+    // 10th Grade
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[0], 'Integrated Math 2b');
+    triedCourses.push('Integrated Math 2b');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[1], 'Integrated Math 3a');
+    triedCourses.push('Integrated Math 3a');
+    // Special: 3b & Pre-Calc 1 in 10th grade, trimester 3
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[2], 'Integrated Math 3b');
+    triedCourses.push('Integrated Math 3b');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[2], 'Pre-Calc 1');
+    triedCourses.push('Pre-Calc 1');
+    // 11th Grade
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[0], 'AP Calculus AB 1');
+    triedCourses.push('AP Calculus AB 1');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[1], 'AP Calculus AB 2');
+    triedCourses.push('AP Calculus AB 2');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[2], 'Pre-Calc 2');
+    triedCourses.push('Pre-Calc 2');
+    // 12th Grade
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[0], 'Bridge to AP Calculus BC');
+    triedCourses.push('Bridge to AP Calculus BC');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[1], 'AP Calculus BC 1');
+    triedCourses.push('AP Calculus BC 1');
+  }
+
+  else if (mathStart === 'Integrated Math 2a') {
+    // 9th Grade
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[0], 'Integrated Math 2a');
+    triedCourses.push('Integrated Math 2a');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[1], 'Integrated Math 2b');
+    triedCourses.push('Integrated Math 2b');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[2], 'Trigonometry');
+    triedCourses.push('Trigonometry');
+    // 10th Grade
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[0], 'Integrated Math 3a');
+    triedCourses.push('Integrated Math 3a');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[1], 'Integrated Math 3b');
+    triedCourses.push('Integrated Math 3b');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[2], 'Pre-Calc 1');
+    triedCourses.push('Pre-Calc 1');
+    // 11th Grade
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[0], 'AP Calculus AB 1');
+    triedCourses.push('AP Calculus AB 1');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[1], 'AP Calculus AB 2');
+    triedCourses.push('AP Calculus AB 2');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[2], 'Pre-Calc 2');
+    triedCourses.push('Pre-Calc 2');
+    // 12th Grade
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[0], 'Bridge to AP Calculus BC');
+    triedCourses.push('Bridge to AP Calculus BC');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[1], 'AP Calculus BC 1');
+    triedCourses.push('AP Calculus BC 1');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[2], 'AP Calculus BC 2');
+    triedCourses.push('AP Calculus BC 2');
+  }
+
+  else if (mathStart === 'Integrated Math 2b') {
+    // 9th Grade
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[0], 'Integrated Math 2b');
+    triedCourses.push('Integrated Math 2b');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[1], 'Integrated Math 3a');
+    triedCourses.push('Integrated Math 3a');
+    // Special: 3b & Pre-Calc 1 in 9th grade, trimester 3
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[2], 'Integrated Math 3b');
+    triedCourses.push('Integrated Math 3b');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[2], 'Pre-Calc 1');
+    triedCourses.push('Pre-Calc 1');
+    // 10th Grade
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[0], 'AP Calculus AB 1');
+    triedCourses.push('AP Calculus AB 1');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[1], 'AP Calculus AB 2');
+    triedCourses.push('AP Calculus AB 2');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[2], 'Pre-Calc 2');
+    triedCourses.push('Pre-Calc 2');
+    // 11th Grade
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[0], 'Bridge to AP Calculus BC');
+    triedCourses.push('Bridge to AP Calculus BC');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[1], 'AP Calculus BC 1');
+    triedCourses.push('AP Calculus BC 1');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[2], 'AP Calculus BC 2');
+    triedCourses.push('AP Calculus BC 2');
+    // 12th Grade
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[0], 'AP Statistics 1');
+    triedCourses.push('AP Statistics 1');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[1], 'AP Statistics 2');
+    triedCourses.push('AP Statistics 2');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[2], 'AP Statistics Seminar');
+    triedCourses.push('AP Statistics Seminar');
+  }
+
+  else if (mathStart === 'Integrated Math 3a') {
+    // 9th Grade
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[0], 'Integrated Math 3a');
+    triedCourses.push('Integrated Math 3a');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[1], 'Integrated Math 3b');
+    triedCourses.push('Integrated Math 3b');
+    fillNextAvailableBox(planner[0].querySelectorAll('td')[2], 'Pre-Calc 1');
+    triedCourses.push('Pre-Calc 1');
+    // 10th Grade
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[0], 'AP Calculus AB 1');
+    triedCourses.push('AP Calculus AB 1');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[1], 'AP Calculus AB 2');
+    triedCourses.push('AP Calculus AB 2');
+    fillNextAvailableBox(planner[1].querySelectorAll('td')[2], 'Pre-Calc 2');
+    triedCourses.push('Pre-Calc 2');
+    // 11th Grade
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[0], 'Bridge to AP Calculus BC');
+    triedCourses.push('Bridge to AP Calculus BC');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[1], 'AP Calculus BC 1');
+    triedCourses.push('AP Calculus BC 1');
+    fillNextAvailableBox(planner[2].querySelectorAll('td')[2], 'AP Calculus BC 2');
+    triedCourses.push('AP Calculus BC 2');
+    // 12th Grade
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[0], 'AP Statistics 1');
+    triedCourses.push('AP Statistics 1');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[1], 'AP Statistics 2');
+    triedCourses.push('AP Statistics 2');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[2], 'AP Statistics Seminar');
+    triedCourses.push('AP Statistics Seminar');
+  }
+
   return triedCourses;
 }

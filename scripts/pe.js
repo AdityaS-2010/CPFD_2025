@@ -4,7 +4,6 @@ function fillPE() {
   const sportChoice = document.getElementById("playSport");
   if (!sportChoice) return [];
 
-  const playsSport = sportChoice.value === "yes";
   const rows = document.querySelectorAll("#plannerBody tr");
   const triedCourses = [];
 
@@ -17,22 +16,47 @@ function fillPE() {
   triedCourses.push("ENS 3");
   fillNextAvailableBox(grade9[2], "ENS 3"); // Tri 3
 
-  if (!playsSport) {
-    // Figure out which grade user chose for ENS 4
-    const gradeSelect = document.getElementById("ens4Grade");
-    let ens4Grade = parseInt(gradeSelect?.value || "10");
-    const targetRow = rows[ens4Grade - 9].querySelectorAll("td");
+  return triedCourses;
+}
 
-    let filled = 0;
-    for (let tri = 0; tri < 3 && filled < 2; tri++) {
-      triedCourses.push("ENS 4");
-      if (fillNextAvailableBox(targetRow[tri], "ENS 4")) {
-        filled++;
+// Flexible ENS 4 placement, called after other requirements
+function fillENS4() {
+  const sportChoice = document.getElementById("playSport");
+  if (!sportChoice || sportChoice.value === "yes") return []; // Don't place ENS 4 if playing a sport
+
+  const gradeSelect = document.getElementById("ens4Grade");
+  let ens4Grade = parseInt(gradeSelect?.value || "10");
+  const rows = document.querySelectorAll("#plannerBody tr");
+
+  for (let gradeOffset = 0; gradeOffset < rows.length - (ens4Grade - 9); gradeOffset++) {
+    const targetRow = rows[ens4Grade - 9 + gradeOffset].querySelectorAll("td");
+    let placedBoxes = [];
+    let placed = 0;
+    for (let tri = 0; tri < 3 && placed < 2; tri++) {
+      const cell = targetRow[tri];
+      const boxes = cell.querySelectorAll("textarea");
+      for (const box of boxes) {
+        if (box.value.trim() === "") {
+          box.value = "ENS 4";
+          placedBoxes.push(box);
+          placed++;
+          break; // Move to next trimester after placing one ENS 4
+        }
       }
     }
+    if (placed === 2) {
+      // Both ENS 4 classes placed in this grade
+      return ["ENS 4", "ENS 4"];
+    } else {
+      // Remove any partial ENS 4 placements before trying next grade
+      for (const box of placedBoxes) {
+        box.value = "";
+      }
+    }
+    // If not enough space, continue to next grade
   }
 
-  return triedCourses;
+  return [];
 }
 
 // Utility function to fill next empty textarea in a cell

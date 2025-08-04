@@ -6,6 +6,26 @@ function getCourseFromCatalog(courseName) {
     return null;
   }
 
+  // Outside language credit
+  if (courseName === "Spanish (Outside Credit)") {
+    return {
+      name: "Spanish (Outside Credit)",
+      credits: 20, // UC requires 20 credits (2 years)
+      ucArea: "E",
+      gradRequirement: "Foreign Language"
+    };
+  }
+
+  // Sport PE credit
+  if (courseName === "Physical Education (Sport Credit)") {
+    return {
+      name: "Physical Education (Sport Credit)",
+      credits: 10, // Assuming 10 credits for Sport PE
+      
+      gradRequirement: "Physical Education"
+    };
+  }
+
   return window.courseCatalog.find(c => c.name === courseName) || null;
 }
 
@@ -21,6 +41,18 @@ function getAllCoursesInPlanner() {
       }
     });
   });
+
+  // Add outside language credit if selected
+  const outsideLanguage = document.getElementById("outsideLanguage");
+  if (outsideLanguage && outsideLanguage.value === "yes") {
+    courseNames.push("Spanish (Outside Credit)");
+  }
+
+  // Add sport PE credit if selected
+  const playSport = document.getElementById("playSport");
+  if (playSport && playSport.value === "yes") {
+    courseNames.push("Physical Education (Sport Credit)");
+  }
 
   return courseNames;
 }
@@ -144,7 +176,6 @@ function runGraduationValidation() {
   const creditTally = {
     English: 0,
     Math: 0,
-    SocialScience: 0,
     WorldHistory: 0,
     USHistory: 0,
     CivicsEconomics: 0,
@@ -162,7 +193,6 @@ function runGraduationValidation() {
   const requiredCredits = {
     English: 40,
     Math: 20,
-    SocialScience: 30,
     WorldHistory: 10,
     USHistory: 10,
     CivicsEconomics: 10,
@@ -191,7 +221,6 @@ function runGraduationValidation() {
       case "B": creditTally.English += credits; break;
       case "C": creditTally.Math += credits; break;
       case "A":
-        creditTally.SocialScience += credits;
         if (course.hsRequirement === "World History") creditTally.WorldHistory += credits;
         if (course.hsRequirement === "US History") creditTally.USHistory += credits;
         if (course.hsRequirement === "Civics/Economics") creditTally.CivicsEconomics += credits;
@@ -213,7 +242,9 @@ function runGraduationValidation() {
   creditTally.Electives += Math.max(0, creditTally.TotalCredits - (
     Math.min(creditTally.English, requiredCredits.English) +
     Math.min(creditTally.Math, requiredCredits.Math) +
-    Math.min(creditTally.SocialScience, requiredCredits.SocialScience) +
+    Math.min(creditTally.WorldHistory, requiredCredits.WorldHistory) +
+    Math.min(creditTally.USHistory, requiredCredits.USHistory) +
+    Math.min(creditTally.CivicsEconomics, requiredCredits.CivicsEconomics) +
     Math.min(creditTally.Science, requiredCredits.Science) +
     Math.min(creditTally.ForeignLanguage, requiredCredits.ForeignLanguage) +
     Math.min(creditTally.FineArts, requiredCredits.FineArts) +

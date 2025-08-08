@@ -78,6 +78,8 @@ function fillMathPathway() {
     triedCourses.push('Bridge to AP Calculus BC');
     fillNextAvailableBox(planner[3].querySelectorAll('td')[1], 'AP Calculus BC 1');
     triedCourses.push('AP Calculus BC 1');
+    fillNextAvailableBox(planner[3].querySelectorAll('td')[2], 'AP Calculus BC 2');
+    triedCourses.push('AP Calculus BC 2');
   }
 
   else if (mathStart === 'Integrated Math 2a') {

@@ -3,34 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Majors</title>
+    <title>High School Course Planner</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f5f8fa 0%, #e9f5ee 60%, #dbefff 100%);
+            color: #003057;
+            font-family: 'Roboto', sans-serif;
+        }
+        .homepage-container {
+            max-width: 800px;
+            margin: 2.5rem auto 0 auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,48,87,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #003057;
+            margin-bottom: 0.7rem;
+        }
+        h2 {
+            color: #175941;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+        }
+        ul {
+            margin-left: 1.2rem;
+        }
+        .start-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.85rem 2.2rem;
+            background: linear-gradient(90deg, #175941 0%, #003057 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,48,87,0.10);
+            transition: background 0.3s, box-shadow 0.3s, transform 0.1s;
+        }
+        .start-btn:hover, .start-btn:focus {
+            background: linear-gradient(90deg, #00703c 0%, #003057 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        @media (max-width: 600px) {
+            .homepage-container {
+                padding: 1.2rem 0.5rem;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+    <div class="homepage-container">
+        <h1>Welcome to the High School Course Planner</h1>
+        <p>
+            This website helps you create a personalized 4-year high school course plan that meets graduation requirements and prepares you for college admissions (including UC/CSU eligibility).
+        </p>
+        <h2>What can you do here?</h2>
+        <ul>
+            <li><strong>Plan your courses:</strong> Select your CTE pathway, math, science, English, social science, fine art, and language preferences.</li>
+            <li><strong>Auto-generate a 4-year plan:</strong> The planner will automatically fill in your schedule based on your choices and graduation/UC/CSU requirements.</li>
+            <li><strong>Download your plan:</strong> Save your personalized course plan as a PDF to share with counselors or parents.</li>
+            <li><strong>Chat with our AI:</strong> Get instant answers to your questions and personalized advice on course selection.</li>
+        </ul>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+            <a href="Pathways/business.html" class="start-btn">Get Started Now</a>
+            <a href="Pathways/catalog.html" class="start-btn">View all the courses we used!</a>
+        </div>
+    </div>
 
-<section class="about-section">
-    <h1>Start Building Your High School Journey</h1>
-    <p>
-        This website helps high school students create a personalized 4-year course plan based on their interests, academic goals, and college aspirations. 
-        It provides tailored recommendations for core classes, electives, and extracurricular activities to align with graduation requirements 
-        and prepare students for their desired careers or college majors.
-    </p>
-</section>
 <!-- Navigation Bar -->
-<nav>
-    <ul class="menu">
-        <li class="dropdown" id="pathwayDropdown">
-            <button class="dropbtn">Select the pathway</button>
-            <ul class="dropdown-content">
-                <li><a href="Pathways/ame.html">Arts, Media &amp; Entertainment</a></li>
-                <li><a href="Pathways/business.html">Business, Finance, &amp; Marketing</a></li>
-                <li><a href="Pathways/engineering.html">Engineering &amp; Architecture</a></li>
-                <li><a href="Pathways/health.html">Health Science &amp; Medical Technology</a></li>
-                <li><a href="Pathways/ict.html">Information &amp; Communication Technology</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

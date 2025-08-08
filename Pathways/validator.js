@@ -264,6 +264,11 @@ function runGraduationValidation() {
 }
 
 function runUCValidation() {
+  if (!window.courseCatalog) {
+    setTimeout(runUCValidation, 100); // Try again in 100ms
+    return;
+  }
+
   const courses = getAllCoursesInPlanner();
   const ucTally = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
   const ucRequirements = { A: 30, B: 40, C: 30, D: 20, E: 20, F: 10, G: 10 };

@@ -4,206 +4,437 @@
   <meta charset="UTF-8" />
   <title>Business, Finance & Marketing</title>
   <link rel="stylesheet" href="../style.css" />
+  <!-- Add Roboto font to match catalog.html -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    body {
+      background: linear-gradient(120deg, #f5f8fa 0%, #e9f5ee 60%, #dbefff 100%);
+      color: #003057;
+      font-family: 'Roboto', sans-serif;
+    }
     table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,48,87,0.08);
     }
     th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
+      border: 1px solid #e0e4ea;
+      padding: 0.7rem;
       text-align: center;
+      font-size: 1rem;
+      font-family: 'Roboto', sans-serif; /* Ensure table cells use Roboto */
     }
     th {
-      background-color: #f0f0f0;
+      background-color: #003057;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      font-family: 'Roboto', sans-serif; /* Ensure header uses Roboto */
+    }
+    tr th:first-child {
+      background: #175941;
+      color: #fff;
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
+    }
+    tr:nth-child(even) td {
+      background: #e9f5ee;
+    }
+    tr:nth-child(odd) td {
+      background: #f5f8fa;
     }
     textarea {
       width: 100%;
       resize: none;
+      border-radius: 4px;
+      border: 1px solid #cfd8dc;
+      background: #f5f8fa;
+      font-family: 'Roboto', sans-serif; /* Match catalog.html font */
+      font-size: 0.98rem;
+      font-weight: 700; /* Make class names bolder */
+      color: #003057;   /* Match catalog card color */
+      padding: 0.3rem 0.5rem;
+      transition: border-color 0.2s;
+      /* Add stronger font smoothing for boldness */
+      -webkit-font-smoothing: antialiased;
+      font-style: normal;
+      letter-spacing: 0.01em;
+    }
+    textarea:focus {
+      border-color: #00703c;
+      outline: none;
+      background: #e9f5ee;
+    }
+    /* --- Modern Selector Row Styling --- */
+    .selectors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* Always 4 cards per row */
+      gap: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+      align-items: stretch;
+      background: none;
     }
     .selector-row {
       display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,48,87,0.08);
+      border: 1.5px solid #e0e4ea;
+      padding: 1.1rem 1.2rem;
+      min-height: 110px; /* Make all cards same height */
+      transition: box-shadow 0.2s;
+      flex: 1 1 320px;
+      word-break: break-word;
+    }
+    .selector-row label {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 500;
+      color: #175941;
+      margin-bottom: 0.5rem;
+      white-space: normal;
+      width: 100%;
+    }
+    .selector-row select {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 500;
+      color: #003057;
+      background: #e9f5ee;
+      border: 1.5px solid #175941;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,112,60,0.10);
+      padding: 0.6rem 1.1rem;
+      transition: box-shadow 0.5s, background 0.5s;
+      outline: none;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.2em;
+      margin-bottom: 0.1rem;
+    }
+    .selector-row select:focus,
+    .selector-row select:hover {
+      background: linear-gradient(90deg, #009e60 0%, #003057 100%);
+      box-shadow: 0 0 0 2px #00703c33;
+    }
+    @media (max-width: 1200px) {
+      .selectors-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 per row on medium screens */
+      }
+    }
+    @media (max-width: 700px) {
+      .selectors-grid {
+        grid-template-columns: 1fr; /* Stack vertically on small screens */
+        gap: 0.7rem;
+      }
+      .selector-row {
+        min-height: 90px;
+        padding: 0.7rem 0.7rem;
+      }
+    }
+    /* Card-like style for #ens4Options */
+    #ens4Options {
+      display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 1.2rem;
+      background: #e9f5ee;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,112,60,0.07);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.2rem;
       flex-wrap: wrap;
+    }
+    #ens4Options label {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #00703c;
+      margin-right: 0.7rem;
+      min-width: 170px;
+      flex: 1 1 170px;
+    }
+    #ens4Options select {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #003057;
+      background: linear-gradient(90deg, #00703c 0%, #003057 100%);
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,112,60,0.10);
+      padding: 0.5rem 1.2rem;
+      margin-right: 0.5rem;
+      transition: box-shadow 0.35s, background 0.35s;
+      outline: none;
+      min-width: 180px;
+      max-width: 100%;
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.2em;
+    }
+    #ens4Options select:focus,
+    #ens4Options select:hover {
+      background: linear-gradient(90deg, #009e60 0%, #003057 100%);
+      box-shadow: 0 0 0 2px #00703c33;
+    }
+    /* Optional: Make table responsive */
+    @media (max-width: 900px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead tr {
+        display: none;
+      }
+      tr {
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        background: white;
+      }
+      th, td {
+        padding: 0.7rem;
+        border: none;
+      }
+      td {
+        background: #f5f8fa;
+      }
+    }
+
+    .planner-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      margin: 2rem 0 1.5rem 0;
+    }
+
+    .main-btn {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(90deg, #175941 0%, #003057 100%);
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,48,87,0.10);
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.1s;
+      letter-spacing: 0.02em;
+      min-width: 220px;
+      max-width: 320px;
+      width: 100%;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-btn:hover, .main-btn:focus {
+      background: linear-gradient(90deg, #009e60 0%, #003057 100%);
+      box-shadow: 0 4px 16px rgba(0,112,60,0.13);
+      transform: translateY(-2px) scale(1.03);
+      outline: none;
+    }
+
+    .main-btn.secondary {
+      background: linear-gradient(90deg, #003057 0%, #175941 100%);
+      color: #fff;
+    }
+
+    .main-btn.secondary:hover, .main-btn.secondary:focus {
+      background: linear-gradient(90deg, #005a8c 0%, #009e60 100%);
     }
   </style>
 </head>
 
 <body>
-  <h1>Business, Finance & Marketing</h1>
-  <p>This pathway is ideal for students interested in working with numbers, people, and public-facing roles...</p>
+  <h1>Plan Your High School Courses with Confidence</h1>
+  <p>Select your CTE pathway and academic preferences to generate a personalized 4-year course plan. Your schedule will be optimized to meet graduation requirements, UC/CSU eligibility, and your individual goals.</p>
   
-  <div class="selector-row">
-    <label for="ctePathway">Select your CTE Pathway:</label>
-    <select id="ctePathway">
-      <option value="business">Business, Finance & Marketing</option>
-      <option value="engineering">Engineering & Architecture</option>
-      <option value="biomed">Health Science & Medical Tech (Biomed)</option>
-      <option value="ict">Information & Communication Technology(CS)</option>
-      <option value="education">Education & Child Development</option>
-    </select>
-  </div>
-
-  <div class="selector-row">
-    <label for="mathStart">Select your first math class:</label>
-    <select id="mathStart">
-      <option value="Math Accel">Math Accel</option>
-      <option value="Integrated Math 1a">Integrated Math 1a</option>
-      <option value="Integrated Math 2a">Integrated Math 2a</option>
-      <option value="Integrated Math 2b">Integrated Math 2b</option>
-      <option value="Integrated Math 3a">Integrated Math 3a</option>
-    </select>
-  </div>
-
-  <div class="selector-row">
-    <label for="playSport">Do you plan on playing a high school sport in grades 10–12?</label>
-    <select id="playSport">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-  </div>
-  
-  <div id="ens4Options" style="margin-top: 1em;">
-    <label for="ens4Grade">In which grade do you want to take ENS 4?</label>
-    <select id="ens4Grade">
-      <option value="10" selected>10th Grade</option>
-      <option value="11">11th Grade</option>
-      <option value="12">12th Grade</option>
-    </select>
-  </div>
-
-  <div class="selector-row">
-    <label for="englishTrack">Select your English track:</label>
-    <select id="englishTrack">
-      <option value="normal">Normal</option>
-      <option value="advanced">Advanced</option>
-    </select>
-  </div>
-
-  <div class="selector-row">
-    <label for="outsideLanguage">Will you fulfill your language credits outside of school?</label>
-    <select id="outsideLanguage">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-  </div>
-
-  <div class="selector-row">
-    <label for="languageChoice">Which language do you plan to study?</label>
-    <select id="languageChoice">
-      <option value="Spanish">Spanish</option>
-      <option value="Chinese">Chinese</option>
-    </select>
-  </div>
-
-  <div class="selector-row">
-    <label for="langStartLevel">At which class level will you start?</label>
-    <select id="langStartLevel">
-      <option value="1">1 (e.g. Spanish 1 or Chinese 1)</option>
-      <option value="2">2 (e.g. Spanish 2 or Chinese 2)</option>
-      <option value="3">3 (e.g. Spanish 3 or Chinese 3)</option>
-    </select>
-  </div>
-
-  <div class="selector-row">
-    <label for="scienceOption">Select your science pathway:</label>
-    <select id="scienceOption">
-      <option value="option1">Bio → Bio → Chem → AP Bio</option>
-      <option value="option2">Bio → Bio → Chem → AP Chem</option>
-      <option value="option3">Bio → Chem → Chem → AP Bio</option>
-      <option value="option4">Bio → Chem → Chem → AP Chem</option>
-      <option value="physics">Physics Track → AP Physics C</option>
-      <option value="environmental">Environmental Science → AP Environmental Science</option>
-      
-    </select>
-  </div>
-  
-  <div class="selector-row">
-    <label for="socialScienceTrack">Select your Social Science track:</label>
-    <select id="socialScienceTrack">
-      <option value="normal">Normal</option>
-      <option value="ap">Advanced</option>
-    </select>
-  </div>
-  
-  <div class="selector-row">
-    <select id="fineArtTrack">
-      <option value="None">None</option>
-      <option value="Drawing and Painting">Drawing and Painting</option>
-      <option value="Ceramics">Ceramics</option>
-      <option value="3D Computer Animation">3D Computer Animation</option>
-      <option value="Drama">Drama</option>
-      <option value="Digital Photography">Digital Photography</option>
-      <option value="Digital Media Productions">Digital Media Productions</option>
-      <option value="Technical Production for Theater">Technical Production for Theater</option>
-      <option value="AP Studio Art: Drawing">AP Studio Art: Drawing</option>
-      <option value="AP Studio Art: 2D">AP Studio Art: 2D</option>
-      <option value="AP Studio Art: 3D">AP Studio Art: 3D</option>
-      <option value="AP Music Theory">AP Music Theory</option>
+  <!-- Place all your selector rows inside this grid container -->
+  <div class="selectors-grid">
+    <div class="selector-row">
+      <label for="ctePathway">Select your CTE Pathway:</label>
+      <select id="ctePathway">
+        <option value="" disabled selected>Select</option>
+        <option value="business">Business, Finance & Marketing</option>
+        <option value="engineering">Engineering & Architecture</option>
+        <option value="biomed">Health Science & Medical Tech (Biomed)</option>
+        <option value="ict">Information & Communication Technology(CS)</option>
+        <option value="education">Education & Child Development</option>
       </select>
+    </div>
+    <div class="selector-row">
+      <label for="mathStart">Select your first math class:</label>
+      <select id="mathStart">
+        <option value="" disabled selected>Select</option>
+        <option value="Math Accel">Math Accel</option>
+        <option value="Integrated Math 1a">Integrated Math 1a</option>
+        <option value="Integrated Math 2a">Integrated Math 2a</option>
+        <option value="Integrated Math 2b">Integrated Math 2b</option>
+        <option value="Integrated Math 3a">Integrated Math 3a</option>
+      </select>
+    </div>
+    <div class="selector-row" id="playSportRow">
+      <label for="playSport">Do you plan on playing a high school sport in grades 10–12?</label>
+      <select id="playSport">
+        <option value="" disabled selected>Select</option>
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+    </div>
+    <div class="selector-row" id="ens4Row" style="display: none;">
+      <label for="ens4Grade">In which grade do you want to take ENS 4?</label>
+      <select id="ens4Grade">
+        <option value="" disabled selected>Select</option>
+        <option value="10">10th Grade</option>
+        <option value="11">11th Grade</option>
+        <option value="12">12th Grade</option>
+      </select>
+    </div>
+    <div class="selector-row">
+      <label for="englishTrack">Select your English track:</label>
+      <select id="englishTrack">
+        <option value="" disabled selected>Select</option>
+        <option value="normal">Normal</option>
+        <option value="advanced">Advanced</option>
+      </select>
+    </div>
+    <div class="selector-row" id="outsideLanguageRow">
+      <label for="outsideLanguage">Will you fulfill your language credits outside of school?</label>
+      <select id="outsideLanguage">
+        <option value="" disabled selected>Select</option>
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+    </div>
+    <div class="selector-row" id="languageChoiceRow" style="display: none;">
+      <label for="languageChoice">Which language do you plan to study?</label>
+      <select id="languageChoice">
+        <option value="" disabled selected>Select</option>
+        <option value="Spanish">Spanish</option>
+        <option value="Chinese">Chinese</option>
+      </select>
+    </div>
+    <div class="selector-row" id="langStartLevelRow" style="display: none;">
+      <label for="langStartLevel">At which class level will you start?</label>
+      <select id="langStartLevel">
+        <option value="" disabled selected>Select</option>
+        <option value="1">1 (e.g. Spanish 1 or Chinese 1)</option>
+        <option value="2">2 (e.g. Spanish 2 or Chinese 2)</option>
+        <option value="3">3 (e.g. Spanish 3 or Chinese 3)</option>
+      </select>
+    </div>
+    <div class="selector-row">
+      <label for="scienceOption">Select your science pathway:</label>
+      <select id="scienceOption">
+        <option value="" disabled selected>Select</option>
+        <option value="option1">Bio → Bio → Chem → AP Bio</option>
+        <option value="option2">Bio → Bio → Chem → AP Chem</option>
+        <option value="option3">Bio → Chem → Chem → AP Bio</option>
+        <option value="option4">Bio → Chem → Chem → AP Chem</option>
+        <option value="physics">Physics Track → AP Physics C</option>
+        <option value="environmental">Environmental Science → AP Environmental Science</option>
+      </select>
+    </div>
+    <div class="selector-row">
+      <label for="socialScienceTrack">Select your Social Science track:</label>
+      <select id="socialScienceTrack">
+        <option value="" disabled selected>Select</option>
+        <option value="normal">Normal</option>
+        <option value="ap">Advanced</option>
+      </select>
+    </div>
+    <div class="selector-row">
+      <label for="fineArtTrack">Select your Fine Art:</label>
+      <select id="fineArtTrack">
+        <option value="" disabled selected>Select</option>
+        <option value="None">None</option>
+        <option value="Drawing and Painting">Drawing and Painting</option>
+        <option value="Ceramics">Ceramics</option>
+        <option value="3D Computer Animation">3D Computer Animation</option>
+        <option value="Drama">Drama</option>
+        <option value="Digital Photography">Digital Photography</option>
+        <option value="Digital Media Productions">Digital Media Productions</option>
+        <option value="Technical Production for Theater">Technical Production for Theater</option>
+        <option value="AP Studio Art: Drawing">AP Studio Art: Drawing</option>
+        <option value="AP Studio Art: 2D">AP Studio Art: 2D</option>
+        <option value="AP Studio Art: 3D">AP Studio Art: 3D</option>
+        <option value="AP Music Theory">AP Music Theory</option>
+      </select>
+    </div>
   </div>
 
-  <div id="validationWrapper" style="display: flex; gap: 2rem; flex-wrap: wrap;">
-    <div id="graduationValidationResults" style="flex: 1 1 300px;"></div>
-    <div id="ucValidationResults" style="flex: 1 1 300px;"></div>
+  <div class="planner-actions">
+    <button class="main-btn" onclick="showPlannerAndValidate()">Generate Planner</button>
+    <button class="main-btn secondary" onclick="resetPlanner()">Reset Planner</button>
   </div>
 
-  <div class="selector-row">
-    <button onclick="fillAllRequirements()">Auto-fill All Required Classes</button>
-    <button onclick="resetPlanner()">Reset Planner</button>
+  <!-- Add 'display: none' to hide by default -->
+  <div id="plannerSection" style="display: none;">
+    <div id="validationWrapper" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+      <div id="graduationValidationResults" style="flex: 1 1 300px;"></div>
+      <div id="ucValidationResults" style="flex: 1 1 300px;"></div>
+    </div>
+
+    <h2>4-Year Course Planner</h2>
+    <p>Note: Use "Off-Roll" to indicate free periods. Each class is worth 5 credits unless noted otherwise.</p>
+    <p style="color: darkred; font-weight: bold;">
+      ⚠ Some trimesters may have fewer than 5 classes auto-filled. 
+      If you want a full schedule, please add extra classes, an Off-Roll, or rearrange classes manually.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Grade</th>
+          <th>Trimester 1</th>
+          <th>Trimester 2</th>
+          <th>Trimester 3</th>
+        </tr>
+      </thead>
+      <tbody id="plannerBody">
+        <tr>
+          <th>9th Grade</th>
+          <td><textarea rows="1" placeholder="Type your classes here!"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <th>10th Grade</th>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <th>11th Grade</th>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+        </tr>
+        <tr>
+          <th>12th Grade</th>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+          <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Place the button here so it only appears with the planner -->
+    <button class="main-btn" id="downloadPdfBtn" onclick="downloadPlannerPDF()">Download Planner as PDF</button>
   </div>
-
-  <button onclick="runValidation()">Validate Credits</button>
-
-  
-  
-  <h2>4-Year Course Planner</h2>
-  <p>Note: Use "Off-Roll" to indicate free periods. Each class is worth 5 credits unless noted otherwise.</p>
-<p style="color: darkred; font-weight: bold;">
-⚠ Some trimesters may have fewer than 5 classes auto-filled. 
-If you want a full schedule, please add extra classes, an Off-Roll, or rearrange classes manually.
-</p>
-
-
-  <table>
-    <thead>
-      <tr>
-        <th>Grade</th>
-        <th>Trimester 1</th>
-        <th>Trimester 2</th>
-        <th>Trimester 3</th>
-      </tr>
-    </thead>
-    <tbody id="plannerBody">
-      <tr>
-        <th>9th Grade</th>
-        <td><textarea rows="1" placeholder="Type your classes here!"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-      </tr>
-      <tr>
-        <th>10th Grade</th>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-      </tr>
-      <tr>
-        <th>11th Grade</th>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-      </tr>
-      <tr>
-        <th>12th Grade</th>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-        <td><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea><textarea rows="1"></textarea></td>
-      </tr>
-    </tbody>
-  </table>
 
   <a href="../index.html">← Back to Home</a>
 
@@ -219,6 +450,8 @@ If you want a full schedule, please add extra classes, an Off-Roll, or rearrange
   <script src="catalog.js"></script>
   <script src="../scripts/fuzzyMatch.js"></script>
   <script src="validator.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
 
@@ -227,25 +460,141 @@ If you want a full schedule, please add extra classes, an Off-Roll, or rearrange
 function resetPlanner() {
   const textareas = document.querySelectorAll('#plannerBody textarea');
   textareas.forEach(area => {
-    area.value = ''; // Clear the value
-    area.style.backgroundColor = ''; // Reset background color
-    area.title = ''; // Clear tooltip
+    area.value = '';
+    area.style.backgroundColor = '';
+    area.title = '';
   });
 
   // Clear the graduation validation results
   const graduationContainer = document.getElementById('graduationValidationResults');
-  if (graduationContainer) {
-    graduationContainer.innerHTML = ''; // Clear the content
-  }
+  if (graduationContainer) graduationContainer.innerHTML = '';
 
   // Clear the UC validation results
   const ucContainer = document.getElementById('ucValidationResults');
-  if (ucContainer) {
-    ucContainer.innerHTML = ''; // Clear the content
-  }
+  if (ucContainer) ucContainer.innerHTML = '';
+
+  // Hide conditional cards (PE/ENS and Language)
+  document.getElementById('ens4Row').style.display = 'none';
+  document.getElementById('playSportRow').style.display = 'flex';
+  document.getElementById('outsideLanguageRow').style.display = 'block';
+  document.getElementById('languageChoiceRow').style.display = 'none';
+  document.getElementById('langStartLevelRow').style.display = 'none';
+
+  // Reset all selects to "Select"
+  const selectIds = [
+    'ctePathway',
+    'mathStart',
+    'playSport',
+    'ens4Grade',
+    'englishTrack',
+    'outsideLanguage',
+    'languageChoice',
+    'langStartLevel',
+    'scienceOption',
+    'socialScienceTrack',
+    'fineArtTrack'
+  ];
+  selectIds.forEach(id => {
+    const sel = document.getElementById(id);
+    if (sel) sel.selectedIndex = 0;
+  });
+
+  // Hide the planner and validation again
+  document.getElementById('plannerSection').style.display = 'none';
 }
 </script>
 
-  </script>
+  <script>
+function toggleEns4Question() {
+  const playSport = document.getElementById('playSport').value;
+  const playSportRow = document.getElementById('playSportRow');
+  const ens4Row = document.getElementById('ens4Row');
+  if (playSport === 'no') {
+    playSportRow.style.display = 'none';
+    ens4Row.style.display = 'flex';
+  } else {
+    playSportRow.style.display = 'flex';
+    ens4Row.style.display = 'none';
+  }
+}
+// Initial setup
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('ens4Row').style.display = 'none';
+  document.getElementById('playSport').addEventListener('change', toggleEns4Question);
+});
+</script>
+
+<script>
+function toggleLanguageQuestions() {
+  const outsideLang = document.getElementById('outsideLanguage').value;
+  const outsideLanguageRow = document.getElementById('outsideLanguageRow');
+  const languageChoiceRow = document.getElementById('languageChoiceRow');
+  const langStartLevelRow = document.getElementById('langStartLevelRow');
+
+  if (outsideLang === 'no') {
+    outsideLanguageRow.style.display = 'none';
+    languageChoiceRow.style.display = 'block';
+    langStartLevelRow.style.display = 'none';
+  } else {
+    outsideLanguageRow.style.display = 'block';
+    languageChoiceRow.style.display = 'none';
+    langStartLevelRow.style.display = 'none';
+  }
+}
+
+function toggleLangStartLevel() {
+  const languageChoice = document.getElementById('languageChoice').value;
+  const languageChoiceRow = document.getElementById('languageChoiceRow');
+  const langStartLevelRow = document.getElementById('langStartLevelRow');
+  if (languageChoice) {
+    languageChoiceRow.style.display = 'none';
+    langStartLevelRow.style.display = 'block';
+  } else {
+    languageChoiceRow.style.display = 'block';
+    langStartLevelRow.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('outsideLanguageRow').style.display = 'block';
+  document.getElementById('languageChoiceRow').style.display = 'none';
+  document.getElementById('langStartLevelRow').style.display = 'none';
+  document.getElementById('outsideLanguage').addEventListener('change', toggleLanguageQuestions);
+  document.getElementById('languageChoice').addEventListener('change', toggleLangStartLevel);
+});
+</script>
+
+<script>
+function showPlannerAndValidate() {
+  fillAllRequirements(); // This generates the planner
+  document.getElementById('plannerSection').style.display = 'block';
+}
+
+
+</script>
+
+<script>
+function downloadPlannerPDF() {
+  const plannerSection = document.getElementById('plannerSection');
+  if (!plannerSection) return;
+
+  html2canvas(plannerSection).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new window.jspdf.jsPDF({
+      orientation: 'landscape',
+      unit: 'pt',
+      format: 'a4'
+    });
+
+    // Fit image to page
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const imgWidth = pageWidth - 40;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+    pdf.save('4-Year-Course-Planner.pdf');
+  });
+}
+</script>
 </body>
 </html>

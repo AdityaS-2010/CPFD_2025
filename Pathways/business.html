@@ -771,7 +771,7 @@ chatForm.addEventListener('submit', async (e) => {
   appendMessage('Counselor', '...');
 
   try {
-    const res = await fetch('http://localhost:3000/api/optimize-planner', {
+    const res = await fetch('https://cpfd-2025.onrender.com/api/optimize-planner', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question: userMsg })

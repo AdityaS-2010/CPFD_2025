@@ -5,6 +5,7 @@
   <title>Business, Finance & Marketing</title>
   <link rel="stylesheet" href="../style.css" />
   <!-- Add Roboto font to match catalog.html -->
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -506,7 +507,16 @@
     <button class="main-btn secondary" onclick="resetPlanner()">Reset Planner</button>
     <button class="main-btn secondary" id="toggleChatBtn" type="button" style="min-width:160px;">Open Chat</button>
   </div>
-
+  
+  <div id="chatbot-container" style="display:none;">
+    <div id="chat-window"></div>
+    <form id="chat-form" autocomplete="off">
+      <textarea id="chat-input" rows="1" maxlength="349" placeholder="Type a message... (max 350 chars)" autocomplete="off"></textarea>
+      <button id="chat-send-btn" type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </form>
+  </div>
   <!-- Add 'display: none' to hide by default -->
   <div id="plannerSection" style="display: none;">
     <div id="validationWrapper" style="display: flex; gap: 2rem; flex-wrap: wrap;">

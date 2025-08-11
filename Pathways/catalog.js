@@ -101,14 +101,14 @@ window.courseCatalog = [
   { name: "Biology of the Living Earth 1", grades: [9,10], ucArea: "D", gradRequirement: "Life Science", prerequisites: [] },
   { name: "Biology of the Living Earth 2", grades: [9,10], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["Biology of the Living Earth 1"] },
 
-  { name: "AP Biology 3", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["Biology of the Living Earth 1", "Biology of the Living Earth 2"] },
+  { name: "AP Biology 3", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: [] },
   { name: "AP Biology 4", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["AP Biology 3"] },
   { name: "AP Biology Seminar", grades: [10,11,12], ucApproved: false, gradRequirement: "Life Science", prerequisites: ["AP Biology 3", "AP Biology 4"] },
 
   { name: "Principles of Biomedical Sciences 1", grades: [9,10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: [] },
   { name: "Principles of Biomedical Sciences 2", grades: [9,10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["Principles of Biomedical Sciences 1"] },
 
-  { name: "Human Body Systems 1", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["Principles of Biomedical Sciences 1", "Principles of Biomedical Sciences 2"] },
+  { name: "Human Body Systems 1", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: [] },
   { name: "Human Body Systems 2", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["Human Body Systems 1"] },
 
   { name: "Honors Medical Interventions 1", grades: [11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: [ ["Principles of Biomedical Sciences 1", "Principles of Biomedical Sciences 2", "Human Body Systems 1", "Human Body Systems 2"], ["AP Biology 3", "AP Biology 4", "AP Biology Seminar"], ] },
@@ -126,11 +126,11 @@ window.courseCatalog = [
   { name: "Marine Science 1", grades: [10,11,12], ucArea: "D", gradRequirement: "Physical Science", prerequisites: ["Integrated Math 1a", "Integrated Math 1b"] },
   { name: "Marine Science 2", grades: [10,11,12], ucArea: "D", gradRequirement: "Physical Science", prerequisites: ["Marine Science 1"] },
 
-  { name: "AP Chemistry 3", grades: [10,11,12], ucArea: "D", gradRequirement: "Physical Science", prerequisites: ["Chemistry in the Earth System 1", "Chemistry in the Earth System 2"] },
+  { name: "AP Chemistry 3", grades: [10,11,12], ucArea: "D", gradRequirement: "Physical Science", prerequisites: [] },
   { name: "AP Chemistry 4", grades: [10,11,12], ucArea: "D", gradRequirement: "Physical Science", prerequisites: ["AP Chemistry 3"] },
   { name: "AP Chemistry Seminar", grades: [10,11,12], ucApproved: false, gradRequirement: "Physical Science", prerequisites: ["AP Chemistry 3", "AP Chemistry 4"] },
 
-  { name: "AP Environmental Science 1", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["Biology of the Living Earth 1", "Biology of the Living Earth 2", "Chemistry in the Earth System 1", "Chemistry in the Earth System 2"] },
+  { name: "AP Environmental Science 1", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: [] },
   { name: "AP Environmental Science 2", grades: [10,11,12], ucArea: "D", gradRequirement: "Life Science", prerequisites: ["AP Environmental Science 1"] },
   { name: "AP Environmental Science Seminar", grades: [10,11,12], ucApproved: false, gradRequirement: "Life Science", prerequisites: ["AP Environmental Science 1", "AP Environmental Science 2"] },
 
@@ -271,7 +271,7 @@ window.courseCatalog = [
   { name: "Computer Science and Software Engineering 1", grades: [9,10,11,12], ucArea: "G", gradRequirement: "Electives", prerequisites: [] },
   { name: "Computer Science and Software Engineering 2", grades: [9,10,11,12], ucArea: "G", gradRequirement: "Electives", prerequisites: ["Computer Science and Software Engineering 1"] },
 
-  { name: "AP Computer Science Principles 1", grades: [10,11,12], ucArea: "G", gradRequirement: "Electives", prerequisites: ["Computer Science and Software Engineering 1", "Computer Science and Software Engineering 2"] },
+  { name: "AP Computer Science Principles 1", grades: [10,11,12], ucArea: "G", gradRequirement: "Electives", prerequisites: [] },
   { name: "AP Computer Science Principles 2", grades: [10,11,12], ucArea: "G", gradRequirement: "Electives", prerequisites: ["AP Computer Science Principles 1"] },
 
   { name: "Data Structures 1", grades: [10,11,12], ucArea: "G", gradRequirement: "Electives", prerequisites: ["AP Computer Science Principles 1", "AP Computer Science Principles 2"] },

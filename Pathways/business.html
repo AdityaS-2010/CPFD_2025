@@ -8,6 +8,39 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    /* Drag and drop style for planner textareas */
+    textarea.dragging {
+      opacity: 0.5;
+      border: 2px dashed #175941;
+      background: #e9f5ee;
+    }
+    textarea.drag-over {
+      border: 2px solid #003057;
+      background: #dbefff;
+    }
+    .warning-message {
+      background: #fff3cd;
+      color: #856404;
+      border: 1.5px solid #ffeeba;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin: 1.2rem auto 0.7rem auto;
+      max-width: 600px;
+      font-size: 1.08rem;
+      font-weight: 500;
+      display: none;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(255, 193, 7, 0.08);
+    }
+    /* Highlight animation for dynamic selector rows */
+    .highlight-appear {
+      animation: highlightFade 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes highlightFade {
+      0% { box-shadow: 0 0 0 4px #ffeb3b, 0 2px 8px rgba(0,48,87,0.08); background: #fffde7; }
+      60% { box-shadow: 0 0 0 8px #fff176, 0 2px 8px rgba(0,48,87,0.08); background: #fffde7; }
+      100% { box-shadow: 0 0 0 0 #fffde7, 0 2px 8px rgba(0,48,87,0.08); background: #fff; }
+    }
     body {
       background: linear-gradient(120deg, #f5f8fa 0%, #e9f5ee 60%, #dbefff 100%);
       color: #003057;
@@ -384,8 +417,11 @@
 </head>
 
 <body>
+  <div id="plannerWarning" class="warning-message"></div>
   <h1>Plan Your High School Courses with Confidence</h1>
-  <p>Select your CTE pathway and academic preferences to generate a personalized 4-year course plan. Your schedule will be optimized to meet graduation requirements, UC/CSU eligibility, and your individual goals.</p>
+  <p>Select your CTE pathway and academic preferences to generate a personalized 4-year course plan. Your schedule will be optimized to meet graduation requirements, UC/CSU eligibility, and your individual goals.
+  Confused? Visit our <a href="resources.html" style="color:#175941;text-decoration:underline;font-weight:600;">Resources page</a> for more information on how to use this planner effectively.</p>
+  </p>
   
   <!-- Place all your selector rows inside this grid container -->
   <div class="selectors-grid">
@@ -580,6 +616,69 @@
     </form>
   </div>
 <script>
+// --- Drag and Drop for Planner Textareas ---
+document.addEventListener('DOMContentLoaded', () => {
+  const plannerBody = document.getElementById('plannerBody');
+  if (!plannerBody) return;
+  let dragged = null;
+
+  plannerBody.addEventListener('dragstart', function(e) {
+    if (e.target.tagName === 'TEXTAREA') {
+      dragged = e.target;
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', dragged.value);
+      dragged.classList.add('dragging');
+    }
+  });
+
+  plannerBody.addEventListener('dragend', function(e) {
+    if (dragged) {
+      dragged.classList.remove('dragging');
+      dragged = null;
+    }
+    plannerBody.querySelectorAll('textarea.drag-over').forEach(t => t.classList.remove('drag-over'));
+  });
+
+  plannerBody.addEventListener('dragover', function(e) {
+    if (e.target.tagName === 'TEXTAREA') {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      if (dragged && e.target !== dragged) {
+        e.target.classList.add('drag-over');
+      }
+    }
+  });
+
+  plannerBody.addEventListener('dragleave', function(e) {
+    if (e.target.tagName === 'TEXTAREA') {
+      e.target.classList.remove('drag-over');
+    }
+  });
+
+  plannerBody.addEventListener('drop', function(e) {
+    if (e.target.tagName === 'TEXTAREA' && dragged && e.target !== dragged) {
+      e.preventDefault();
+      // Swap the values
+      const temp = e.target.value;
+      e.target.value = dragged.value;
+      dragged.value = temp;
+      e.target.classList.remove('drag-over');
+    }
+  });
+
+  // Make all planner textareas draggable
+  plannerBody.querySelectorAll('textarea').forEach(area => {
+    area.setAttribute('draggable', 'true');
+  });
+
+  // If planner is re-generated, re-apply draggable
+  const observer = new MutationObserver(() => {
+    plannerBody.querySelectorAll('textarea').forEach(area => {
+      area.setAttribute('draggable', 'true');
+    });
+  });
+  observer.observe(plannerBody, { childList: true, subtree: true });
+});
 // Toggle chatbot visibility
 document.getElementById('toggleChatBtn').addEventListener('click', function() {
   const chat = document.getElementById('chatbot-container');
@@ -593,7 +692,7 @@ document.getElementById('toggleChatBtn').addEventListener('click', function() {
 });
 </script>
 
-  <a href="../index.html" class="main-btn secondary" style="display:inline-block;text-align:center;text-decoration:none;margin:1.5rem 0 0 0;min-width:0;width:auto;padding-left:2.2rem;padding-right:2.2rem;margin-bottom:0;line-height:1.2;">← Back to Home</a>
+  <a href="../index.html" class="main-btn secondary" style="display:inline-block;text-align:center;text-decoration:none;margin:1.5rem 0 0 0;min-width:0;width:auto;padding-left:2.2rem;padding-right:2.2rem;margin-bottom:0;line-height:1.2;">Back to Home</a>
 
   <script type="module" src="../scripts/business.js"></script>
   <script src="../scripts/language.js"></script>
@@ -662,6 +761,14 @@ function resetPlanner() {
 </script>
 
   <script>
+function highlightRow(row) {
+  if (!row) return;
+  row.classList.remove('highlight-appear');
+  // Force reflow to restart animation
+  void row.offsetWidth;
+  row.classList.add('highlight-appear');
+}
+
 function toggleEns4Question() {
   const playSport = document.getElementById('playSport').value;
   const playSportRow = document.getElementById('playSportRow');
@@ -669,9 +776,11 @@ function toggleEns4Question() {
   if (playSport === 'no') {
     playSportRow.style.display = 'none';
     ens4Row.style.display = 'flex';
+    highlightRow(ens4Row);
   } else {
     playSportRow.style.display = 'flex';
     ens4Row.style.display = 'none';
+    highlightRow(playSportRow);
   }
 }
 // Initial setup
@@ -682,6 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
+
 function toggleLanguageQuestions() {
   const outsideLang = document.getElementById('outsideLanguage').value;
   const outsideLanguageRow = document.getElementById('outsideLanguageRow');
@@ -692,10 +802,12 @@ function toggleLanguageQuestions() {
     outsideLanguageRow.style.display = 'none';
     languageChoiceRow.style.display = 'block';
     langStartLevelRow.style.display = 'none';
+    highlightRow(languageChoiceRow);
   } else {
     outsideLanguageRow.style.display = 'block';
     languageChoiceRow.style.display = 'none';
     langStartLevelRow.style.display = 'none';
+    highlightRow(outsideLanguageRow);
   }
 }
 
@@ -706,9 +818,11 @@ function toggleLangStartLevel() {
   if (languageChoice) {
     languageChoiceRow.style.display = 'none';
     langStartLevelRow.style.display = 'block';
+    highlightRow(langStartLevelRow);
   } else {
     languageChoiceRow.style.display = 'block';
     langStartLevelRow.style.display = 'none';
+    highlightRow(languageChoiceRow);
   }
 }
 
@@ -722,7 +836,54 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
+
 function showPlannerAndValidate() {
+  // List of required select IDs
+  const requiredSelects = [
+    'ctePathway',
+    'mathStart',
+    'playSport',
+    'englishTrack',
+    'outsideLanguage',
+    'scienceOption',
+    'socialScienceTrack',
+    'fineArtTrack'
+  ];
+  // Conditional questions
+  const playSport = document.getElementById('playSport').value;
+  if (playSport === 'no') requiredSelects.push('ens4Grade');
+  const outsideLanguage = document.getElementById('outsideLanguage').value;
+  if (outsideLanguage === 'no') {
+    requiredSelects.push('languageChoice');
+    const languageChoice = document.getElementById('languageChoice').value;
+    if (languageChoice) requiredSelects.push('langStartLevel');
+  }
+
+  let missing = [];
+  requiredSelects.forEach(id => {
+    const sel = document.getElementById(id);
+    if (sel && (!sel.value || sel.value === 'Select' || sel.selectedIndex === 0)) {
+      missing.push(id);
+    }
+  });
+
+  const warningDiv = document.getElementById('plannerWarning');
+  if (missing.length > 0) {
+    warningDiv.textContent = 'Please answer all the questions above before generating your planner.';
+    warningDiv.style.display = 'block';
+    // Optionally, scroll to the first missing question
+    const firstMissing = document.getElementById(missing[0]);
+    if (firstMissing) {
+      const row = firstMissing.closest('.selector-row');
+      if (row) {
+        highlightRow(row);
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    return;
+  } else {
+    warningDiv.style.display = 'none';
+  }
   fillAllRequirements(); // This generates the planner
   document.getElementById('plannerSection').style.display = 'block';
 }

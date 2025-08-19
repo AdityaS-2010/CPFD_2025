@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>How to Use This Website – Resources</title>
+	<link rel="stylesheet" href="../style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+	<style>
+	.bottom-btn-row {
+		display: flex;
+		gap: 1.2rem;
+		justify-content: center;
+		margin: 1.2rem 0 0.5rem 0;
+		flex-wrap: nowrap;
+	}
+	.bottom-btns-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.7rem;
+		margin-bottom: 1.5rem;
+	}
+	.main-btn.secondary {
+		min-width: 220px;
+		max-width: 320px;
+		width: 100%;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.08rem;
+		font-weight: 600;
+	}
+	@media (max-width: 600px) {
+		.bottom-btn-row {
+			flex-direction: column;
+			gap: 0.7rem;
+			align-items: center;
+		}
+		.main-btn.secondary {
+			min-width: 180px;
+		}
+	}
+	.bottom-btn-row {
+		display: flex;
+		gap: 1.2rem;
+		justify-content: center;
+		margin: 2.5rem 0 0.5rem 0;
+		flex-wrap: nowrap;
+	}
+	@media (max-width: 600px) {
+		.bottom-btn-row {
+			flex-direction: column;
+			gap: 0.7rem;
+			align-items: center;
+		}
+	}
+		body {
+			font-family: 'Roboto', Arial, sans-serif;
+			margin: 2.5rem auto 2rem auto;
+			max-width: 900px;
+			background: linear-gradient(120deg, #f5f8fa 0%, #e9f5ee 60%, #dbefff 100%);
+			color: #003057;
+			border-radius: 18px;
+			box-shadow: 0 2px 12px rgba(0,48,87,0.08);
+			padding: 2.5rem 2.5rem 2rem 2.5rem;
+		}
+		h1, h2, h3 {
+			color: #003057;
+			font-family: 'Roboto', sans-serif;
+			font-weight: 700;
+			letter-spacing: 0.01em;
+		}
+		h1 {
+			font-size: 2.2rem;
+			margin-bottom: 0.7rem;
+		}
+		h2 {
+			font-size: 1.35rem;
+			margin-top: 2.2rem;
+			margin-bottom: 0.7rem;
+			background: linear-gradient(90deg, #175941 0%, #003057 100%);
+			color: #fff;
+			padding: 0.7rem 1.2rem;
+			border-radius: 8px 8px 0 0;
+			box-shadow: 0 2px 8px rgba(0,48,87,0.07);
+			letter-spacing: 0.01em;
+		}
+		ol.feature-list, ul {
+			background: #fff;
+			border-radius: 0 0 12px 12px;
+			box-shadow: 0 2px 8px rgba(0,48,87,0.06);
+			padding: 1.2rem 2rem 1.2rem 2.2rem;
+			margin: 0 0 2rem 0;
+			font-size: 1.08rem;
+			color: #003057;
+		}
+		ol.feature-list {
+			margin-bottom: 2.2rem;
+			margin-top: 0;
+		}
+		li {
+			margin-bottom: 0.7rem;
+			line-height: 1.7;
+		}
+		.video-section {
+			margin-top: 3rem;
+			padding: 2rem 1.5rem;
+			background: #e9f5ee;
+			border-radius: 12px;
+			text-align: center;
+			border: 1.5px solid #dbe2ef;
+			box-shadow: 0 2px 8px rgba(0,112,60,0.07);
+		}
+		.video-placeholder {
+			width: 100%;
+			max-width: 480px;
+			height: 270px;
+			background: #cfd8dc;
+			border: 2px dashed #90a4ae;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #607d8b;
+			font-size: 1.2rem;
+			margin: 0 auto 1rem auto;
+			border-radius: 8px;
+		}
+		a.main-btn, a.main-btn.secondary {
+			font-family: 'Roboto', sans-serif;
+			font-size: 1.08rem;
+			font-weight: 600;
+			color: #fff;
+			background: linear-gradient(90deg, #175941 0%, #003057 100%);
+			border: none;
+			border-radius: 8px;
+			padding: 0.6rem 1.5rem;
+			box-shadow: 0 2px 8px rgba(0,48,87,0.10);
+			cursor: pointer;
+			transition: background 0.3s, box-shadow 0.3s, transform 0.1s;
+			letter-spacing: 0.02em;
+			min-width: 180px;
+			max-width: 320px;
+			width: auto;
+			height: 48px;
+			display: inline-block;
+			text-align: center;
+			text-decoration: none;
+			margin-top: 2rem;
+		}
+		a.main-btn.secondary {
+			background: linear-gradient(90deg, #003057 0%, #175941 100%);
+			color: #fff;
+		}
+		a.main-btn.secondary:hover, a.main-btn.secondary:focus {
+			background: linear-gradient(90deg, #005a8c 0%, #009e60 100%);
+		}
+		a.main-btn:hover, a.main-btn:focus {
+			background: linear-gradient(90deg, #009e60 0%, #003057 100%);
+			box-shadow: 0 4px 16px rgba(0,112,60,0.13);
+			transform: translateY(-2px) scale(1.03);
+			outline: none;
+		}
+		@media (max-width: 900px) {
+			body {
+				padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+				max-width: 99vw;
+			}
+			ol.feature-list, ul {
+				padding: 1rem 0.7rem 1rem 1.2rem;
+			}
+			.video-section {
+				padding: 1.2rem 0.2rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<h1>How to Use the Course Planner Website</h1>
+	<p>Welcome! This page will guide you through the main features of the course planner and how to get the most out of it.</p>
+
+	<h2>Step-by-Step Guide</h2>
+	<ol class="feature-list">
+		<li>
+			<strong>Select Your Pathway:</strong> <br>
+			Choose your CTE pathway (e.g., Business, Engineering, Biomed, ICT, Education) from the dropdown menu at the top of the planner page.
+		</li>
+		<li>
+			<strong>Customize Your Preferences:</strong> <br>
+			Use the dropdowns to select your math, English, science, social science, fine art, and language tracks. If you play a sport or take a language outside of school, be sure to indicate that for a more accurate plan.
+		</li>
+		<li>
+			<strong>Generate Your 4-Year Planner:</strong> <br>
+			Click the <b>Generate Planner</b> button. The website will automatically fill in your schedule, ensuring you meet graduation and college eligibility requirements.
+		</li>
+		<li>
+			<strong>Review & Edit:</strong> <br>
+			You can manually edit any course in the planner. The system will highlight any unrecognized courses in red and suggest corrections.
+		</li>
+		<li>
+			<strong>Validate Your Plan:</strong> <br>
+			The planner will show if you are missing any requirements for graduation or UC/CSU eligibility. Adjust your plan as needed.
+		</li>
+		<li>
+			<strong>Download as PDF:</strong> <br>
+			Once satisfied, click <b>Download Planner as PDF</b> to save or print your plan.
+		</li>
+		<li>
+			<strong>Ask the Chatbot:</strong> <br>
+			Use the <b>Open Chat</b> button to ask questions about course planning. The chatbot can help with requirements, course options, and more.
+		</li>
+		<li>
+			<strong>Reset Planner:</strong> <br>
+			Click <b>Reset Planner</b> to clear all selections and start over.
+		</li>
+	</ol>
+
+	<h2>Tips & Features</h2>
+	<ul>
+		<li>All course names are auto-corrected as you type. If a course is not recognized, it will be highlighted.</li>
+		<li>Conditional questions (like ENS4 or language) will appear only if relevant to your selections.</li>
+		<li>All your choices are private and not saved on the server.</li>
+		<li>Use the <b>Back to Home</b> button to return to the main page at any time.</li>
+	</ul>
+
+	<div class="video-section">
+			<h2>Demo Video: How to Use the Planner</h2>
+			<video width="100%" height="auto" style="max-width: 960px; max-height: 540px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,48,87,0.10); background: #000;" controls muted poster="">
+				<source src="demo.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+	</div>
+
+	<div class="bottom-btns-container">
+		<div class="bottom-btn-row">
+			<a href="business.html" class="main-btn nav-btn-gradient">Go to Course Planner</a>
+			<a href="catalog.html" class="main-btn nav-btn-gradient">View Course Catalog</a>
+		</div>
+		<a href="../index.html" class="main-btn secondary">← Back to Home</a>
+	</div>
+	</body>
+	</html>

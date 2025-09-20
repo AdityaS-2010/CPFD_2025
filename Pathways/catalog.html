@@ -48,14 +48,55 @@
       gap: 1.5rem;
     }
     .course-card {
-      background: #e9f5ee;
-      border-left: 5px solid #00703c;
-      padding: 1rem;
-      border-radius: 4px;
-      transition: transform 0.2s;
+      background: linear-gradient(120deg, #e9f5ee 0%, #dbefff 100%);
+      border-left: 6px solid #175941;
+      box-shadow: 0 2px 12px rgba(0,48,87,0.08);
+      padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+      border-radius: 12px;
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      position: relative;
     }
     .course-card:hover {
-      transform: scale(1.03);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 4px 16px rgba(0,112,60,0.13);
+    }
+    .course-title {
+      font-weight: bold;
+      font-size: 1.22rem;
+      color: #175941;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.01em;
+    }
+    .course-details {
+      margin-top: 0.2rem;
+      font-size: 1.02rem;
+      color: #003057;
+      line-height: 1.6;
+    }
+    .learn-more-btn {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(90deg, #175941 0%, #003057 100%);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1.3rem;
+      box-shadow: 0 2px 8px rgba(0,48,87,0.10);
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.1s;
+      letter-spacing: 0.02em;
+      margin-top: 0.5rem;
+      align-self: flex-end;
+      outline: none;
+    }
+    .learn-more-btn:hover, .learn-more-btn:focus {
+      background: linear-gradient(90deg, #009e60 0%, #003057 100%);
+      box-shadow: 0 4px 16px rgba(0,112,60,0.13);
+      transform: translateY(-2px) scale(1.04);
     }
     .course-title {
       font-weight: bold;
@@ -123,221 +164,187 @@
   </div>
   <div class="container">
     <section id="area-a">
-      <h2 style="margin: 0; background: #00703c; color: white; padding: 1rem; border-radius: 8px 8px 0 0; font-size: 1.5rem;">A - Social Science</h2>
-      <div class="courses">
-        <div class="course-card">
-          <div class="course-title">World History 1-2</div>
-          <div class="course-details">
-            Grades: 10<br/>
-            UC Area: A<br/>
-            Prerequisites: None
-          </div>
-        </div>
+  <h2 style="margin: 0; background: #00703c; color: white; padding: 1rem; border-radius: 8px 8px 0 0; font-size: 1.5rem;">A - Social Science</h2>
+  <div class="courses" id="history-courses"></div>
 
-        <div class="course-card">
-          <div class="course-title">AP World History 1-2</div>
-          <div class="course-details">
-            Grades: 10<br/>
-            UC Area: A<br/>
-            Prerequisites: None
-          </div>
-        </div>
+  <!-- Modal for course descriptions -->
+  <div id="course-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background: linear-gradient(120deg, #e9f5ee 0%, #dbefff 100%); box-shadow: 0 8px 32px rgba(0,48,87,0.18); padding:2.2rem 2rem 2rem 2rem; border-radius:18px; max-width:600px; margin:auto; position:relative; border: 2px solid #175941;">
+      <span id="close-modal" style="position:absolute; top:1rem; right:1rem; cursor:pointer; font-size:2rem; color:#175941; font-weight:700; transition: color 0.2s;">&times;</span>
+      <h2 id="modal-title" style="margin-top:0; color:#e9f5ee; font-size:1.7rem; font-weight:700; letter-spacing:0.01em;"></h2>
+      <p id="modal-description" style="color:#222; font-size:1.13rem; line-height:1.7; margin-top:1rem;"></p>
+    </div>
+  </div>
+  <script src="../scripts/courseDescriptions.js"></script>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // List of history courses and details
+    const historyCourses = [
+      {
+        title: "World History 1-2",
+        details: "Grades: 10<br/>UC Area: A<br/>Prerequisites: None"
+      },
+      {
+        title: "AP World History 1-2",
+        details: "Grades: 10<br/>UC Area: A<br/>Prerequisites: None"
+      },
+      {
+        title: "World Geography & Cultures",
+        details: "Grades: 10<br/>UC Area: A<br/>Prerequisites: Must have taken AP World History 1-2"
+      },
+      {
+        title: "US History 1-2",
+        details: "Grades: 11<br/>UC Area: A<br/>Prerequisites: None"
+      },
+      {
+        title: "AP US History 1-2",
+        details: "Grades: 11<br/>UC Area: A<br/>Prerequisites: None"
+      },
+      {
+        title: "AP US History Seminar",
+        details: "Grades: 11<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP US History 1-2"
+      },
+      {
+        title: "Civics",
+        details: "Grades: 12<br/>UC Area: A<br/>Prerequisites: US History 1-2"
+      },
+      {
+        title: "Economics",
+        details: "Grades: 12<br/>UC Area: A<br/>Prerequisites: US History 1-2"
+      },
+      {
+        title: "AP US Government & Politics 1-2",
+        details: "Grades: 12<br/>UC Area: A<br/>Prerequisites: None"
+      },
+      {
+        title: "AP US Government Seminar",
+        details: "Grades: 12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP US Government & Politics 1-2"
+      }
+    ];
 
-        <div class="course-card">
-          <div class="course-title">World Geography & Cultures</div>
-          <div class="course-details">
-            Grades: 10<br/>
-            UC Area: A<br/>
-            Prerequisites: Must have taken AP World History 1-2
-          </div>
-        </div>
+    
+    // List of English courses and details
+    const englishCourses = [
+      {
+        title: "High School English 1-2",
+        details: "Grades: 9<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "Honors High School English 1-2",
+        details: "Grades: 9<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "High School English 3-4",
+        details: "Grades: 10<br/>UC Area: B<br/>Prerequisites: High School English 1-2"
+      },
+      {
+        title: "Honors Humanities 1-2",
+        details: "Grades: 10<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "AP English Seminar 1-2",
+        details: "Grades: 10<br/>UC Area: B (pending approval)<br/>Prerequisites: None"
+      },
+      {
+        title: "American Literature 1-2",
+        details: "Grades: 11<br/>UC Area: B<br/>Prerequisites: High School English 3-4"
+      },
+      {
+        title: "Ethnic Literature 1-2",
+        details: "Grades: 11-12<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "Expository Reading & Writing 1-2",
+        details: "Grades: 10-12<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "World Literature 1-2",
+        details: "Grades: 12<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "AP English Language 1-2",
+        details: "Grades: 11-12<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "AP English Language Seminar",
+        details: "Grades: 11-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP English Language 1-2"
+      },
+      {
+        title: "AP English Literature 1-2",
+        details: "Grades: 11-12<br/>UC Area: B<br/>Prerequisites: None"
+      },
+      {
+        title: "AP English Literature Seminar",
+        details: "Grades: 11-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP English Literature 1-2"
+      }
+    ];
 
-        <div class="course-card">
-          <div class="course-title">US History 1-2</div>
-          <div class="course-details">
-            Grades: 11<br/>
-            UC Area: A<br/>
-            Prerequisites: None
-          </div>
-        </div>
+  // Render history course cards
+  const historyCoursesContainer = document.getElementById('history-courses');
+  historyCourses.forEach(course => {
+      const card = document.createElement('div');
+      card.className = 'course-card';
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'course-title';
+      titleDiv.textContent = course.title;
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'course-details';
+      detailsDiv.innerHTML = course.details;
+      const btn = document.createElement('button');
+      btn.className = 'learn-more-btn';
+      btn.textContent = 'Learn more';
+      btn.setAttribute('data-course', course.title);
+      card.appendChild(titleDiv);
+      card.appendChild(detailsDiv);
+      card.appendChild(btn);
+      historyCoursesContainer.appendChild(card);
+    });
 
-        <div class="course-card">
-          <div class="course-title">AP US History 1-2</div>
-          <div class="course-details">
-            Grades: 11<br/>
-            UC Area: A<br/>
-            Prerequisites: None
-          </div>
-        </div>
+    // Render English course cards
+    const englishCoursesContainer = document.getElementById('english-courses');
+    if (englishCoursesContainer) {
+      englishCoursesContainer.innerHTML = '';
+      englishCourses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'course-title';
+        titleDiv.textContent = course.title;
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'course-details';
+        detailsDiv.innerHTML = course.details;
+        const btn = document.createElement('button');
+        btn.className = 'learn-more-btn';
+        btn.textContent = 'Learn more';
+        btn.setAttribute('data-course', course.title);
+        card.appendChild(titleDiv);
+        card.appendChild(detailsDiv);
+        card.appendChild(btn);
+        englishCoursesContainer.appendChild(card);
+      });
+    }
 
-        <div class="course-card">
-          <div class="course-title">AP US History Seminar</div>
-          <div class="course-details">
-            Grades: 11<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP US History 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Civics</div>
-          <div class="course-details">
-            Grades: 12<br/>
-            UC Area: A<br/>
-            Prerequisites: US History 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Economics</div>
-          <div class="course-details">
-            Grades: 12<br/>
-            UC Area: A<br/>
-            Prerequisites: US History 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP US Government & Politics 1-2</div>
-          <div class="course-details">
-            Grades: 12<br/>
-            UC Area: A<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP US Government Seminar</div>
-          <div class="course-details">
-            Grades: 12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP US Government & Politics 1-2
-          </div>
-        </div>
-      </div>
+    // Modal logic
+    document.addEventListener('click', function(e) {
+      if (e.target.classList && e.target.classList.contains('learn-more-btn')) {
+        const course = e.target.getAttribute('data-course');
+        document.getElementById('modal-title').textContent = course;
+        document.getElementById('modal-description').textContent = (typeof courseDescriptions !== 'undefined' && courseDescriptions[course]) ? courseDescriptions[course] : "Description not available.";
+        document.getElementById('course-modal').style.display = 'flex';
+      }
+      if (e.target.id === 'close-modal' || e.target.id === 'course-modal') {
+        document.getElementById('course-modal').style.display = 'none';
+      }
+    });
+  });
+  </script>
     </section>
 
         <!-- UC Area B -->
     <section id="area-b">
-      <h2>B - English</h2>
-      <div class="courses">
-        <div class="course-card">
-          <div class="course-title">High School English 1-2</div>
-          <div class="course-details">
-            Grades: 9<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Honors High School English 1-2</div>
-          <div class="course-details">
-            Grades: 9<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">High School English 3-4</div>
-          <div class="course-details">
-            Grades: 10<br/>
-            UC Area: B<br/>
-            Prerequisites: High School English 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Honors Humanities 1-2</div>
-          <div class="course-details">
-            Grades: 10<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP English Seminar 1-2</div>
-          <div class="course-details">
-            Grades: 10<br/>
-            UC Area: B (pending approval)<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">American Literature 1-2</div>
-          <div class="course-details">
-            Grades: 11<br/>
-            UC Area: B<br/>
-            Prerequisites: High School English 3-4
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Ethnic Literature 1-2</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Expository Reading & Writing 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">World Literature 1-2</div>
-          <div class="course-details">
-            Grades: 12<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP English Language 1-2</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP English Language Seminar</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP English Language 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP English Literature 1-2</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: B<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP English Literature Seminar</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP English Literature 1-2
-          </div>
-        </div>
-      </div>
+      <h2 style="margin: 0; background: #00703c; color: white; padding: 1rem; border-radius: 8px 8px 0 0; font-size: 1.5rem;">B - English</h2>
+      <div class="courses" id="english-courses"></div>
     </section>
 
         <!-- UC Area C -->

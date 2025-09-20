@@ -631,6 +631,7 @@
       { title: "Art Exploration", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" }
     ];
 
+
     // Render Elective course cards
     const electiveCoursesContainer = document.querySelector('#area-g .courses');
     if (electiveCoursesContainer) {
@@ -652,6 +653,41 @@
         card.appendChild(detailsDiv);
         card.appendChild(btn);
         electiveCoursesContainer.appendChild(card);
+      });
+    }
+
+    // List of PE courses and details
+    const peCourses = [
+      { title: "ENS 1-4", details: "Grades: 9-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: None" },
+      { title: "Health", details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: None" },
+      { title: "Unified PE 1-2", details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: None" },
+      { title: "Racquet Sports", details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: ENS 1-3" },
+      { title: "Weight Training", details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: None" },
+      { title: "Marching PE/Band", details: "Grades: 9-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: Concert Band" },
+      { title: "Marching PE/Tall Flags", details: "Grades: 9-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: Tall Flags (Dance Prop) 1-2" }
+    ];
+
+    // Render PE course cards
+    const peCoursesContainer = document.querySelector('#area-pe .courses');
+    if (peCoursesContainer) {
+      peCoursesContainer.innerHTML = '';
+      peCourses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'course-title';
+        titleDiv.textContent = course.title;
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'course-details';
+        detailsDiv.innerHTML = course.details;
+        const btn = document.createElement('button');
+        btn.className = 'learn-more-btn';
+        btn.textContent = 'Learn more';
+        btn.setAttribute('data-course', course.title);
+        card.appendChild(titleDiv);
+        card.appendChild(detailsDiv);
+        card.appendChild(btn);
+        peCoursesContainer.appendChild(card);
       });
     }
 
@@ -694,131 +730,7 @@
       <h2>E - World Languages</h2>
       <div class="courses">
 
-        <div class="course-card">
-          <div class="course-title">Chinese 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: E<br/>
-            Prerequisites: None
-          </div>
-        </div>
 
-        <div class="course-card">
-          <div class="course-title">Chinese 3-4</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: E<br/>
-            Prerequisites: Chinese 2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Chinese 5-6</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: E<br/>
-            Prerequisites: Chinese 4
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Chinese 7-8</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: E<br/>
-            Prerequisites: Chinese 6
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Chinese 9</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: E<br/>
-            Prerequisites: Chinese 8
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Chinese Language 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: E<br/>
-            Prerequisites: B or better in Chinese 7-8
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Chinese Language Seminar</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP Chinese Language 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Spanish 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: E<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Spanish 3-4</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: E<br/>
-            Prerequisites: Spanish 2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Spanish 5-6</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: E<br/>
-            Prerequisites: Spanish 4
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Spanish 7-8</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: E<br/>
-            Prerequisites: Spanish 6
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Spanish Language 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: E<br/>
-            Prerequisites: B or better in Spanish 7-8
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Spanish Language Seminar</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP Spanish Language 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Korean 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: E (pending UC/CSU approval)<br/>
-            Prerequisites: None
-          </div>
-        </div>
 
       </div>
     </section>
@@ -828,222 +740,7 @@
       <h2>F - Fine Arts</h2>
       <div class="courses">
 
-        <div class="course-card">
-          <div class="course-title">Drawing and Painting 1-4</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None for Drawing and Painting 1; sequential prerequisites for higher levels
-          </div>
-        </div>
 
-        <div class="course-card">
-          <div class="course-title">3D Computer Animation 1-4</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None for 3D Computer Animation 1; sequential prerequisites for higher levels
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Art of Game Design 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F (pending UC/CSU approval)<br/>
-            Prerequisites: Recommended - 3D Computer Animation 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Ceramics 1-4</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None for Ceramics 1; sequential prerequisites for higher levels
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Design Mixed Media 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Digital Media Productions 1-4</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None for Digital Media Productions 1; sequential prerequisites for higher levels
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Drama 1-6</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None for Drama 1; sequential prerequisites for higher levels
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Theater Study 7-8</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: Drama 5-6
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Technical Production for Theater 1-4</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None for Technical Production for Theater 1; sequential prerequisites for higher levels
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Digital Photography 1-6</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None for Digital Photography 1; sequential prerequisites for higher levels
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Studio Art</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: Any one of:
-            Drawing and Painting 4, Digital Photography 6, Ceramics 4, 3D Computer Animation 4, or Digital Media Productions 4
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Studio Art: Drawing 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: Studio Art
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Studio Art: 2D 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: Studio Art
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Studio Art: 3D 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: Studio Art
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Orchestra 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Chamber Orchestra 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Concert Band 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Wind Ensemble 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: Audition + teacher recommendation, Concert Band
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Symphonic Band 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Music Theory 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Harmony</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: AP Music Theory 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Tall Flags (Dance Prop)</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: Audition
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Concert Choir 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: F<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Classical Vocal Ensemble</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: F<br/>
-            Prerequisites: One year of choral experience, audition
-          </div>
-        </div>
 
       </div>
     </section>
@@ -1053,293 +750,7 @@
       <h2>G - Electives</h2>
       <div class="courses">
 
-        <div class="course-card">
-          <div class="course-title">AVID 1-2</div>
-          <div class="course-details">
-            Grades: 9<br/>
-            UC Area: G<br/>
-            Prerequisites: Application/Interview
-          </div>
-        </div>
 
-        <div class="course-card">
-          <div class="course-title">AVID 3-4</div>
-          <div class="course-details">
-            Grades: 10<br/>
-            UC Area: G<br/>
-            Prerequisites: AVID 1-2, Application/Interview
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AVID 5-6</div>
-          <div class="course-details">
-            Grades: 11<br/>
-            UC Area: G<br/>
-            Prerequisites: AVID 3-4, Application/Interview
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AVID Senior Seminar 1-2</div>
-          <div class="course-details">
-            Grades: 12<br/>
-            UC Area: G<br/>
-            Prerequisites: AVID 5-6, Application/Interview
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Ethnic Studies 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Business Law 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Introduction to Finance 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: Integrated Math 3a-3b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Marketing Economics 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Child Development & Psychology 1-4</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Robotics 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: Integrated Math 1a
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Introduction to Engineering Design 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Honors Principles of Engineering 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: Integrated Math 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Computer Science and Software Engineering 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Computer Science Principles 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: CSSE 1-2, or 3.5+ GPA plus experience in programming languages
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Data Structures 1</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: AP Computer Science Principles 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Computer Science A 1-2</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: G<br/>
-            Prerequisites: AP CSP, or teacher recommendation and proficiency in JavaScript/Linux
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Data Structures 2</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: G<br/>
-            Prerequisites: AP Computer Science A 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Human Geography 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: A or G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Human Geography Seminar</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: AP Human Geography 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Psychology 1-2</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Psychology 1</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: G<br/>
-            Prerequisites: AP Psychology 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Link Crew Leadership 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">ASB</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: Application/Interview
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Internship</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: Student must secure own internship
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Work Experience 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: Work permit required
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Yearbook 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Library & Information Science Teaching Assistant 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Vocational Learning Assistant</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Academic Tutor</div>
-          <div class="course-details">
-            Grades: 11-12<br/>
-            UC Area: G<br/>
-            Prerequisites: Teacher recommendation
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Academic Literacy 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-        
-        <div class="course-card">
-          <div class="course-title">Academic Success</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
-        
-        <div class="course-card">
-          <div class="course-title">Art Exploration</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: G<br/>
-            Prerequisites: None
-          </div>
-        </div>
 
       </div>
     </section>
@@ -1349,68 +760,7 @@
       <h2>PE - Physical Education</h2>
       <div class="courses">
 
-        <div class="course-card">
-          <div class="course-title">ENS 1-4</div>
-          <div class="course-details">
-            Grades: 9-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: None
-          </div>
-        </div>
 
-        <div class="course-card">
-          <div class="course-title">Health</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Unified PE 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: 
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Racquet Sports</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: ENS 1-3
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Weight Training</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Marching PE/Band</div>
-          <div class="course-details">
-            Grades: 9-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: Concert Band
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Marching PE/Tall Flags</div>
-          <div class="course-details">
-            Grades: 9-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: Tall Flags (Dance Prop) 1-2
-          </div>
-        </div>
 
       </div>
     </section>

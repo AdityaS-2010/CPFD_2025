@@ -280,9 +280,49 @@
       }
     ];
 
-  // Render history course cards
-  const historyCoursesContainer = document.getElementById('history-courses');
-  historyCourses.forEach(course => {
+    // List of math courses and details
+    const mathCourses = [
+      {
+        title: "Math Accel 1-2",
+        details: "Grades: 9-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: None"
+      },
+      {
+        title: "Integrated Math 1a-1b",
+        details: "Grades: 9-12<br/>UC Area: C<br/>Prerequisites: Math 8th Grade"
+      },
+      {
+        title: "Integrated Math 2a-2b",
+        details: "Grades: 9-12<br/>UC Area: C<br/>Prerequisites: Integrated Math 1a-1b"
+      },
+      {
+        title: "Integrated Math 3a-3b",
+        details: "Grades: 9-12<br/>UC Area: C<br/>Prerequisites: Integrated Math 2a-2b and/or Trigonometry"
+      },
+      {
+        title: "Trigonometry",
+        details: "Grades: 9-12<br/>UC Area: C<br/>Prerequisites: Integrated Math 2a-2b"
+      },
+      {
+        title: "College Algebra 1-2",
+        details: "Grades: 10-12<br/>UC Area: C<br/>Prerequisites: C or higher in Integrated Math 3a-3b or Trigonometry/Statistics"
+      },
+      {
+        title: "Pre-Calculus 1-2",
+        details: "Grades: 9-12<br/>UC Area: C<br/>Prerequisites: A or B in Integrated Math 3a-3b"
+      },
+      {
+        title: "AP Calculus AB 1-2",
+        details: "Grades: 10-12<br/>UC Area: C<br/>Prerequisites: Completion of Pre-Calculus 1"
+      },
+      {
+        title: "AP Statistics Seminar",
+        details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Statistics 1-2"
+      }
+    ];
+
+    // Render history course cards
+    const historyCoursesContainer = document.getElementById('history-courses');
+    historyCourses.forEach(course => {
       const card = document.createElement('div');
       card.className = 'course-card';
       const titleDiv = document.createElement('div');
@@ -325,6 +365,30 @@
       });
     }
 
+    // Render math course cards
+    const mathCoursesContainer = document.getElementById('math-courses');
+    if (mathCoursesContainer) {
+      mathCoursesContainer.innerHTML = '';
+      mathCourses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'course-title';
+        titleDiv.textContent = course.title;
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'course-details';
+        detailsDiv.innerHTML = course.details;
+        const btn = document.createElement('button');
+        btn.className = 'learn-more-btn';
+        btn.textContent = 'Learn more';
+        btn.setAttribute('data-course', course.title);
+        card.appendChild(titleDiv);
+        card.appendChild(detailsDiv);
+        card.appendChild(btn);
+        mathCoursesContainer.appendChild(card);
+      });
+    }
+
     // Modal logic
     document.addEventListener('click', function(e) {
       if (e.target.classList && e.target.classList.contains('learn-more-btn')) {
@@ -350,7 +414,7 @@
         <!-- UC Area C -->
     <section id="area-c">
       <h2>C - Mathematics</h2>
-      <div class="courses">
+      <div class="courses" id="math-courses">
 
         <div class="course-card">
           <div class="course-title">Math Accel 1</div>
@@ -368,7 +432,7 @@
           <div class="course-details">
             Grades: 9-12<br/>
             UC Area: C<br/>
-            Prerequisites: None
+            Prerequisites: Math 8th Grade
           </div>
         </div>
 
@@ -386,7 +450,7 @@
           <div class="course-details">
             Grades: 9-12<br/>
             UC Area: C<br/>
-            Prerequisites: Integrated Math 2a-2b or Trigonometry
+            Prerequisites: Integrated Math 2a-2b and/or Trigonometry
           </div>
         </div>
 
@@ -404,7 +468,7 @@
           <div class="course-details">
             Grades: 10-12<br/>
             UC Area: C<br/>
-            Prerequisites: C or higher in Integrated Math 3a-3b
+            Prerequisites: C or higher in Integrated Math 3a-3b or Trigonometry/Statistics
           </div>
         </div>
 
@@ -422,7 +486,7 @@
           <div class="course-details">
             Grades: 10-12<br/>
             UC Area: C<br/>
-            Prerequisites: Pre-Calc 1
+            Prerequisites: Completion of Pre-Calculus 1
           </div>
         </div>
 

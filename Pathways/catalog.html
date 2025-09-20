@@ -489,6 +489,48 @@
       });
     }
 
+    // List of language courses and details
+    const languagesCourses = [
+      { title: "Chinese 1-2", details: "Grades: 9-12<br/>UC Area: E<br/>Prerequisites: None" },
+      { title: "Chinese 3-4", details: "Grades: 9-12<br/>UC Area: E<br/>Prerequisites: Chinese 2" },
+      { title: "Chinese 5-6", details: "Grades: 9-12<br/>UC Area: E<br/>Prerequisites: Chinese 4" },
+      { title: "Chinese 7-8", details: "Grades: 10-12<br/>UC Area: E<br/>Prerequisites: Chinese 6" },
+      { title: "Chinese 9", details: "Grades: 10-12<br/>UC Area: E<br/>Prerequisites: Chinese 8" },
+      { title: "AP Chinese Language 1-2", details: "Grades: 10-12<br/>UC Area: E<br/>Prerequisites: B or better in Chinese 7-8" },
+      { title: "AP Chinese Language Seminar", details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Chinese Language 1-2" },
+      { title: "Spanish 1-2", details: "Grades: 9-12<br/>UC Area: E<br/>Prerequisites: None" },
+      { title: "Spanish 3-4", details: "Grades: 9-12<br/>UC Area: E<br/>Prerequisites: Spanish 2" },
+      { title: "Spanish 5-6", details: "Grades: 9-12<br/>UC Area: E<br/>Prerequisites: Spanish 4" },
+      { title: "Spanish 7-8", details: "Grades: 10-12<br/>UC Area: E<br/>Prerequisites: Spanish 6" },
+      { title: "AP Spanish Language 1-2", details: "Grades: 10-12<br/>UC Area: E<br/>Prerequisites: B or better in Spanish 7-8" },
+      { title: "AP Spanish Language Seminar", details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Spanish Language 1-2" },
+      { title: "Korean 1-2", details: "Grades: 9-12<br/>UC Area: E (pending UC/CSU approval)<br/>Prerequisites: None" }
+    ];
+
+    // Render language course cards
+    const languagesCoursesContainer = document.querySelector('#area-e .courses');
+    if (languagesCoursesContainer) {
+      languagesCoursesContainer.innerHTML = '';
+      languagesCourses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'course-title';
+        titleDiv.textContent = course.title;
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'course-details';
+        detailsDiv.innerHTML = course.details;
+        const btn = document.createElement('button');
+        btn.className = 'learn-more-btn';
+        btn.textContent = 'Learn more';
+        btn.setAttribute('data-course', course.title);
+        card.appendChild(titleDiv);
+        card.appendChild(detailsDiv);
+        card.appendChild(btn);
+        languagesCoursesContainer.appendChild(card);
+      });
+    }
+
     // Modal logic
     document.addEventListener('click', function(e) {
       if (e.target.classList && e.target.classList.contains('learn-more-btn')) {

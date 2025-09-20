@@ -320,6 +320,82 @@
       }
     ];
 
+    // List of science courses and details
+    const scienceCourses = [
+      {
+        title: "Biology of the Living Earth 1-2",
+        details: "Grades: 9-10<br/>UC Area: D<br/>Prerequisites: Completion of or concurrent enrollment in Integrated Math 1a-1b"
+      },
+      {
+        title: "AP Biology 3-4",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: Biology of the Living Earth 1-2, Chemistry of the Earth System 1-2"
+      },
+      {
+        title: "AP Biology Seminar",
+        details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Biology 3-4"
+      },
+      {
+        title: "Principles of Biomedical Sciences 1-2",
+        details: "Grades: 9-12<br/>UC Area: D<br/>Prerequisites: None"
+      },
+      {
+        title: "Human Body Systems 1-2",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: Principles of Biomedical Sciences 1-2"
+      },
+      {
+        title: "Honors Medical Interventions 1-2",
+        details: "Grades: 11-12<br/>UC Area: D<br/>Prerequisites: Principles of Biomedical Sciences 1-2, Human Body Systems 1-2, or AP Biology 3-4"
+      },
+      {
+        title: "Fundamentals of Physics & Chemistry 1-2",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: Integrated Math 1a-1b"
+      },
+      {
+        title: "Chemistry in the Earth System 1-2",
+        details: "Grades: 9-12<br/>UC Area: D<br/>Prerequisites: B or better in Integrated Math 1a-1b"
+      },
+      {
+        title: "Physics of the Universe 1-2",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: B or better in Integrated Math 1a-1b"
+      },
+      {
+        title: "Marine Science",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: B or better in Integrated Math 1a-1b"
+      },
+      {
+        title: "AP Chemistry 3-4",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: B or better in Chemistry in the Earth System 1-2"
+      },
+      {
+        title: "AP Chemistry Seminar",
+        details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Chemistry 3-4"
+      },
+      {
+        title: "AP Environmental Science 1-2",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: Biology of the Living Earth 1-2, Chemistry in the Earth System 1-2"
+      },
+      {
+        title: "AP Environmental Science Seminar",
+        details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Environmental Science 1-2"
+      },
+      {
+        title: "AP Physics C: Mechanics 1a-1b",
+        details: "Grades: 10-12<br/>UC Area: D<br/>Prerequisites: Completion of or concurrent enrollment in AP Calc AB (preferably Calc BC). Physics of the Universe strongly recommended."
+      },
+      {
+        title: "AP Physics C: Mechanics Seminar",
+        details: "Grades: 10-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Physics C: Mechanics 1a-1b"
+      },
+      {
+        title: "AP Physics C: Electricity & Magnetism 1-2",
+        details: "Grades: 11-12<br/>UC Area: D<br/>Prerequisites: Completion of or concurrent enrollment in AP Calc AB (preferably Calc BC). AP Physics C Mechanics."
+      },
+      {
+        title: "AP Physics C: Electricity & Magnetism Seminar",
+        details: "Grades: 11-12<br/>UC Area: Not UC/CSU Approved<br/>Prerequisites: AP Physics C: Electricity & Magnetism 1-2"
+      }
+    ];
+
     // Render history course cards
     const historyCoursesContainer = document.getElementById('history-courses');
     historyCourses.forEach(course => {
@@ -389,6 +465,30 @@
       });
     }
 
+    // Render science course cards
+    const scienceCoursesContainer = document.getElementById('science-courses');
+    if (scienceCoursesContainer) {
+      scienceCoursesContainer.innerHTML = '';
+      scienceCourses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'course-title';
+        titleDiv.textContent = course.title;
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'course-details';
+        detailsDiv.innerHTML = course.details;
+        const btn = document.createElement('button');
+        btn.className = 'learn-more-btn';
+        btn.textContent = 'Learn more';
+        btn.setAttribute('data-course', course.title);
+        card.appendChild(titleDiv);
+        card.appendChild(detailsDiv);
+        card.appendChild(btn);
+        scienceCoursesContainer.appendChild(card);
+      });
+    }
+
     // Modal logic
     document.addEventListener('click', function(e) {
       if (e.target.classList && e.target.classList.contains('learn-more-btn')) {
@@ -414,289 +514,13 @@
         <!-- UC Area C -->
     <section id="area-c">
       <h2>C - Mathematics</h2>
-      <div class="courses" id="math-courses">
-
-        <div class="course-card">
-          <div class="course-title">Math Accel 1</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: None
-          </div>
-        </div>
-
-
-
-        <div class="course-card">
-          <div class="course-title">Integrated Math 1a-1b</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: C<br/>
-            Prerequisites: Math 8th Grade
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Integrated Math 2a-2b</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: C<br/>
-            Prerequisites: Integrated Math 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Integrated Math 3a-3b</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: C<br/>
-            Prerequisites: Integrated Math 2a-2b and/or Trigonometry
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Trigonometry</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: C<br/>
-            Prerequisites: Integrated Math 2a-2b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">College Algebra</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: C<br/>
-            Prerequisites: C or higher in Integrated Math 3a-3b or Trigonometry/Statistics
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Pre-Calc 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br/>
-            UC Area: C<br/>
-            Prerequisites: A or B in Integrated Math 3a-3b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Calculus AB 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: C<br/>
-            Prerequisites: Completion of Pre-Calculus 1
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Bridge to AP Calculus BC</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP Calculus AB 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Calculus BC 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: C<br/>
-            Prerequisites: B in AP Calculus AB
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Statistics 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: C<br/>
-            Prerequisites: Integrated Math 3a-3b or Trig/Statistics
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Statistics Seminar</div>
-          <div class="course-details">
-            Grades: 10-12<br/>
-            UC Area: Not UC/CSU Approved<br/>
-            Prerequisites: AP Statistics 1-2
-          </div>
-        </div>
-
-      </div>
+      <div class="courses" id="math-courses"></div>
     </section>
 
         <!-- UC Area D -->
     <section id="area-d">
       <h2>D - Sciences</h2>
-      <div class="courses">
-
-        <div class="course-card">
-          <div class="course-title">Biology of the Living Earth 1-2</div>
-          <div class="course-details">
-            Grades: 9-10<br />
-            UC Area: D<br />
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Biology 3-4</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: Biology of the Living Earth 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Biology Seminar</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: AP Biology 3-4
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Principles of Biomedical Sciences 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br />
-            UC Area: D<br />
-            Prerequisites: None
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Human Body Systems 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: Principles of Biomedical Sciences 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Honors Medical Interventions 1-2</div>
-          <div class="course-details">
-            Grades: 11-12<br />
-            UC Area: D<br />
-            Prerequisites: Principles of Biomedical Sciences 1-2, Human Body Systems 1-2, or AP Biology 3-4
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Fundamentals of Physics & Chemistry 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: Integrated Math 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Chemistry in the Earth System 1-2</div>
-          <div class="course-details">
-            Grades: 9-12<br />
-            UC Area: D<br />
-            Prerequisites: Integrated Math 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Physics of the Universe 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: Integrated Math 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">Marine Science 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: Integrated Math 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Chemistry 3-4</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: Chemistry in the Earth System 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Chemistry Seminar</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: AP Chemistry 3-4
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Environmental Science 1-2</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: Biology of the Living Earth 1-2, Chemistry in the Earth System 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Environmental Science Seminar</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: AP Environmental Science 1-2
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Physics C: Mechanics 1a-1b</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: D<br />
-            Prerequisites: AP Calculus AB 1
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Physics C: Mechanics Seminar</div>
-          <div class="course-details">
-            Grades: 10-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: AP Physics C: Mechanics 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Physics C: Electricity & Magnetism 1-2</div>
-          <div class="course-details">
-            Grades: 11-12<br />
-            UC Area: D<br />
-            Prerequisites: AP Physics C: Mechanics 1a-1b
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">AP Physics C: Electricity & Magnetism Seminar</div>
-          <div class="course-details">
-            Grades: 11-12<br />
-            UC Area: Not UC/CSU Approved<br />
-            Prerequisites: AP Physics C: Electricity & Magnetism 1-2
-          </div>
-        </div>
-
-      </div>
+      <div class="courses" id="science-courses"></div>
     </section>
 
         <!-- UC Area E -->

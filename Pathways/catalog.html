@@ -489,6 +489,7 @@
       });
     }
 
+
     // List of language courses and details
     const languagesCourses = [
       { title: "Chinese 1-2", details: "Grades: 9-12<br/>UC Area: E<br/>Prerequisites: None" },
@@ -528,6 +529,67 @@
         card.appendChild(detailsDiv);
         card.appendChild(btn);
         languagesCoursesContainer.appendChild(card);
+      });
+    }
+
+    // List of Fine Arts courses and details
+    const fineArtsCourses = [
+      { title: "Drawing and Painting 1-2", details: "Grades: 9-12<br/>UC Area: F<br/>Prerequisites: None" },
+      { title: "Drawing and Painting 3-4", details: "Grades: 9-12<br/>UC Area: F<br/>Prerequisites: Drawing and Painting 1-2" },
+      { title: "3D Computer Animation 1-2", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: None" },
+      { title: "3D Computer Animation 3-4", details: "Grades: 10-12<br/>UC Area: F or G<br/>Prerequisites: 3D Computer Animation 1-2" },
+      { title: "Art of Game Design 1-2", details: "Grades: 10-12<br/>UC Area: F (pending approval)<br/>Prerequisites: Recommended - 3D Computer Animation 1-2" },
+      { title: "Ceramics 1-2", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: None" },
+      { title: "Ceramics 3-4", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Ceramics 1-2" },
+      { title: "Design Mixed Media 1-2", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: None" },
+      { title: "Digital Media Productions 1-2", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: None" },
+      { title: "Digital Media Productions 3-4", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: Digital Media Productions 1-2" },
+      { title: "Drama 1-2", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: None" },
+      { title: "Drama 3-4", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: Drama 1-2" },
+      { title: "Drama 5-6", details: "Grades: 10-12<br/>UC Area: F or G<br/>Prerequisites: Drama 3-4 or Teacher recommendation" },
+      { title: "Theater Study 7-8", details: "Grades: 10-12<br/>UC Area: F or G<br/>Prerequisites: Drama 5-6 or Teacher recommendation" },
+      { title: "Technical Production for Theater 1-2", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: None" },
+      { title: "Technical Production for Theater 3-4", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: Technical Production for Theater 1-2" },
+      { title: "Digital Photography 1-2", details: "Grades: 9-12<br/>UC Area: F or G<br/>Prerequisites: None" },
+      { title: "Digital Photography 3-4", details: "Grades: 10-12<br/>UC Area: F or G<br/>Prerequisites: Digital Photography 1-2" },
+      { title: "Photography 5-6", details: "Grades: 10-12<br/>UC Area: F or G<br/>Prerequisites: Photography 3-4" },
+      { title: "Studio Art", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Drawing and Painting 1-4, Photo 1-6, Ceramics 1-4, 3D Computer Animation 1-4, or Digital Media Prod. 1-4" },
+      { title: "AP Studio Art: Drawing 1-2", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Teacher recommendation" },
+      { title: "AP Studio Art: 2D", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Teacher recommendation" },
+      { title: "AP Studio Art: 3D", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Teacher recommendation" },
+      { title: "Orchestra 1-2", details: "Grades: 9-12<br/>UC Area: F<br/>Prerequisites: Previous orchestra experience and ability to read and perform music. Instruments limited to violin, viola, cello, and string bass." },
+      { title: "Chamber Orchestra", details: "Grades: 9-12<br/>UC Area: F<br/>Prerequisites: Previous orchestra experience and ability to read and perform music. Instruments limited to violin, viola, cello, and string bass." },
+      { title: "Concert Band 1-2", details: "Grades: 9-12<br/>UC Area: F<br/>Prerequisites: Previous band experience" },
+      { title: "Wind Ensemble 1-2", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Audition and Teacher recommendation, Concert Band" },
+      { title: "Symphonic Band 1-2", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Previous band experience" },
+      { title: "AP Music Theory 1-2", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: Teacher recommendation" },
+      { title: "Harmony", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: AP Music Theory 1-2" },
+      { title: "Tall Flags (Dance Prop)", details: "Grades: 9-12<br/>UC Area: F<br/>Prerequisites: Audition" },
+      { title: "Concert Choir 1-2", details: "Grades: 9-12<br/>UC Area: F<br/>Prerequisites: Previous choral experience" },
+      { title: "Classical Vocal Ensemble", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: One year of choral experience and audition" }
+    ];
+
+    // Render Fine Arts course cards
+    const fineArtsCoursesContainer = document.querySelector('#area-f .courses');
+    if (fineArtsCoursesContainer) {
+      fineArtsCoursesContainer.innerHTML = '';
+      fineArtsCourses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'course-title';
+        titleDiv.textContent = course.title;
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'course-details';
+        detailsDiv.innerHTML = course.details;
+        const btn = document.createElement('button');
+        btn.className = 'learn-more-btn';
+        btn.textContent = 'Learn more';
+        btn.setAttribute('data-course', course.title);
+        card.appendChild(titleDiv);
+        card.appendChild(detailsDiv);
+        card.appendChild(btn);
+        fineArtsCoursesContainer.appendChild(card);
       });
     }
 

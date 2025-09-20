@@ -569,6 +569,7 @@
       { title: "Classical Vocal Ensemble", details: "Grades: 10-12<br/>UC Area: F<br/>Prerequisites: One year of choral experience and audition" }
     ];
 
+
     // Render Fine Arts course cards
     const fineArtsCoursesContainer = document.querySelector('#area-f .courses');
     if (fineArtsCoursesContainer) {
@@ -590,6 +591,67 @@
         card.appendChild(detailsDiv);
         card.appendChild(btn);
         fineArtsCoursesContainer.appendChild(card);
+      });
+    }
+
+    // List of Elective courses and details
+    const electiveCourses = [
+      { title: "AVID 1-2", details: "Grades: 9<br/>UC Area: G<br/>Prerequisites: Application/Interview" },
+      { title: "AVID 3-4", details: "Grades: 10<br/>UC Area: G<br/>Prerequisites: AVID 1-2, Application/Interview" },
+      { title: "AVID 5-6", details: "Grades: 11<br/>UC Area: G<br/>Prerequisites: AVID 3-4, Application/Interview" },
+      { title: "AVID Senior Seminar 1-2", details: "Grades: 12<br/>UC Area: G<br/>Prerequisites: AVID 5-6, Application/Interview" },
+      { title: "Ethnic Studies 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Business Law 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Introduction to Finance 1-2", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: Integrated Math 3a-3b" },
+      { title: "Marketing Economics 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Child Development & Psychology 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Child Development & Psychology 3-4", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: Child Development & Psychology 1-2" },
+      { title: "Robotics 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: Integrated Math 1a" },
+      { title: "Introduction to Engineering Design 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Honors Principles of Engineering", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: Integrated Math 1a-1b" },
+      { title: "Computer Science & Software Engineering 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "AP Computer Science Principles 1-2", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: CSSE 1-2, or 3.5+ GPA plus experience in programming languages" },
+      { title: "Data Structures 1", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: AP Computer Science Principles 1-2" },
+      { title: "AP Computer Science A 1-2", details: "Grades: 11-12<br/>UC Area: G<br/>Prerequisites: AP CSP, or teacher recommendation and proficiency in JavaScript/Linux" },
+      { title: "Data Structures 2", details: "Grades: 11-12<br/>UC Area: G<br/>Prerequisites: AP Computer Science A 1-2" },
+      { title: "AP Human Geography 1-2", details: "Grades: 9-12<br/>UC Area: A or G<br/>Prerequisites: None" },
+      { title: "AP Human Geography Seminar", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: AP Human Geography 1-2" },
+      { title: "AP Psychology 1-2", details: "Grades: 11-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Psychology 1", details: "Grades: 11-12<br/>UC Area: G<br/>Prerequisites: AP Psychology 1-2" },
+      { title: "Link Crew Leadership 1-2", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "ASB/Planning & Leadership", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: Application/Interview" },
+      { title: "Internship", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: Student must secure own internship" },
+      { title: "Work Experience 1-2", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: Work permit required" },
+      { title: "Yearbook 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Library & Info. Science Teaching Asst 1-2", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Vocational Learning Assistant", details: "Grades: 10-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Academic Tutor", details: "Grades: 11-12<br/>UC Area: G<br/>Prerequisites: Teacher recommendation" },
+      { title: "Academic Literacy 1-2", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Academic Success", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" },
+      { title: "Art Exploration", details: "Grades: 9-12<br/>UC Area: G<br/>Prerequisites: None" }
+    ];
+
+    // Render Elective course cards
+    const electiveCoursesContainer = document.querySelector('#area-g .courses');
+    if (electiveCoursesContainer) {
+      electiveCoursesContainer.innerHTML = '';
+      electiveCourses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'course-title';
+        titleDiv.textContent = course.title;
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'course-details';
+        detailsDiv.innerHTML = course.details;
+        const btn = document.createElement('button');
+        btn.className = 'learn-more-btn';
+        btn.textContent = 'Learn more';
+        btn.setAttribute('data-course', course.title);
+        card.appendChild(titleDiv);
+        card.appendChild(detailsDiv);
+        card.appendChild(btn);
+        electiveCoursesContainer.appendChild(card);
       });
     }
 

@@ -448,7 +448,7 @@
       </select>
     </div>
     <div class="selector-row" id="playSportRow">
-      <label for="playSport">Do you plan on playing a high school sport in grades 10–12?</label>
+      <label for="playSport">Do you plan on playing a high school sport that covers ENS credits?</label>
       <select id="playSport">
         <option value="" disabled selected>Select</option>
         <option value="no">No</option>
@@ -681,14 +681,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // Toggle chatbot visibility
 document.getElementById('toggleChatBtn').addEventListener('click', function() {
-  const chat = document.getElementById('chatbot-container');
-  if (chat.style.display === 'none' || chat.style.display === '') {
-    chat.style.display = 'flex';
-    this.textContent = 'Close Chat';
-  } else {
-    chat.style.display = 'none';
-    this.textContent = 'Open Chat';
-  }
+  // Open chatbot.html in a new movable window
+  window.open('chatbot.html', 'ChatbotWindow', 'width=420,height=600,resizable=yes,scrollbars=yes');
 });
 </script>
 

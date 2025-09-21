@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Course Planner Chatbot</title>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+	<style>
+		body { font-family: 'Roboto', sans-serif; background: #f5f8fa; margin: 0; }
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#chatbot-container {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			min-width: 320px;
+			min-height: 320px;
+			background: #f5f8fa;
+			border-radius: 0;
+			box-shadow: none;
+			display: flex;
+			flex-direction: column;
+		}
+		#chat-window {
+			flex: 1 1 auto;
+			background: #f5f8fa;
+			border-radius: 0;
+			padding: 1.2rem 1.2rem 0.7rem 1.2rem;
+			overflow-y: auto;
+			display: flex;
+			flex-direction: column;
+			gap: 0.7rem;
+			min-height: 80px;
+			max-height: none;
+			height: 100%;
+			border-bottom: 1.5px solid #e0e4ea;
+		}
+		#chat-form {
+			display: flex;
+			flex-direction: row;
+			align-items: flex-end;
+			gap: 0.5rem;
+			padding: 1.2rem;
+			background: #f5f8fa;
+			border-radius: 0;
+			border-top: 1.5px solid #e0e4ea;
+		}
+		#chat-input { flex: 1 1 auto; min-height: 38px; max-height: 120px; resize: none; border-radius: 22px; border: 1.5px solid #dbefff; padding: 0.7rem 1.2rem; font-size: 1.08rem; font-family: 'Roboto', sans-serif; background: #fff; box-shadow: 0 1px 2px rgba(0,48,87,0.04); transition: border-color 0.2s; outline: none; width: 100%; margin-right: 0.3rem; overflow-y: hidden; }
+		#chat-input:focus { border-color: #00703c; background: #f5f8fa; }
+		#chat-send-btn { background: #175941; border: none; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; margin-left: 0.1rem; margin-bottom: 2px; }
+		#chat-send-btn:hover, #chat-send-btn:focus { background: #009e60; }
+		#chat-send-btn svg { width: 22px; height: 22px; fill: #fff; display: block; }
+		.chat-bubble { display: inline-block; padding: 0.7em 1.1em; border-radius: 18px; max-width: 80%; word-break: break-word; font-size: 1.04rem; margin-bottom: 0.1em; box-shadow: 0 1px 4px rgba(0,48,87,0.07); }
+		.chat-bubble.user { background: linear-gradient(90deg, #175941 0%, #003057 100%); color: #fff; align-self: flex-end; border-bottom-right-radius: 6px; margin-left: auto; }
+		.chat-bubble.counselor { background: #fff; color: #003057; align-self: flex-start; border-bottom-left-radius: 6px; margin-right: auto; }
+		.chat-sender { font-size: 0.92em; font-weight: 600; margin-bottom: 0.1em; color: #175941; margin-left: 0.2em; }
+		@media (max-width: 900px) {
+			#chatbot-container {
+				width: 100vw;
+				height: 100vh;
+				min-width: 0;
+				min-height: 0;
+				border-radius: 0;
+			}
+			#chat-window, #chat-form {
+				padding: 0.7rem 0.3rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="chatbot-container">
+		<div id="chat-window"></div>
+		<form id="chat-form" autocomplete="off">
+			<textarea id="chat-input" rows="1" maxlength="349" placeholder="Type a message... (max 350 chars)" autocomplete="off"></textarea>
+			<button id="chat-send-btn" type="submit" aria-label="Send">
+				<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+			</button>
+		</form>
+	</div>
+<script>
+const chatWindow = document.getElementById('chat-window');
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+chatInput.addEventListener('input', function() {
+	this.style.height = 'auto';
+	this.style.height = (this.scrollHeight) + 'px';
+});
+chatForm.addEventListener('submit', async (e) => {
+	e.preventDefault();
+	const userMsg = chatInput.value.trim();
+	if (!userMsg) return;
+	if (userMsg.length > 349) {
+		appendMessage('Counselor', `<span style='color:darkred;font-weight:bold;'>Your question is too long (${userMsg.length} characters). Please limit your question to 350 characters or fewer.</span>`);
+		return;
+	}
+	appendMessage('You', userMsg);
+	chatInput.value = '';
+	chatInput.style.height = 'auto';
+	appendMessage('Counselor', '...');
+	try {
+		const res = await fetch('https://cpfd-2025.onrender.com/api/optimize-planner', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ question: userMsg })
+		});
+		const data = await res.json();
+		let reply = data.reply || JSON.stringify(data.optimizedPlanner, null, 2) || "Sorry, I couldn't help with that.";
+		let jsonMatch = reply.match(/```json[\s\n]*([\s\S]*?)```/i) || reply.match(/```[\s\n]*([\s\S]*?)```/i);
+		let formatted = '';
+		let obj = null;
+		if (jsonMatch) {
+			try {
+				let jsonStr = jsonMatch[1].trim();
+				let endIdx = Math.max(jsonStr.lastIndexOf('}'), jsonStr.lastIndexOf(']'));
+				if (endIdx !== -1) jsonStr = jsonStr.slice(0, endIdx + 1);
+				obj = JSON.parse(jsonStr);
+			} catch (e) { obj = null; }
+		} else {
+			try { if (typeof reply === 'string' && reply.trim().startsWith('{')) { obj = JSON.parse(reply); } } catch (e) { obj = null; }
+		}
+		let classArray = null;
+		if (obj && typeof obj === 'object') {
+			for (const key in obj) {
+				if (Array.isArray(obj[key]) && obj[key].length > 0 && typeof obj[key][0] === 'object' && 'name' in obj[key][0]) {
+					classArray = obj[key];
+					break;
+				}
+			}
+		}
+		if (classArray) {
+			formatted = '<ul style="margin:0 0 0 1.2em;padding:0;">';
+			classArray.forEach(cls => {
+				formatted += `<li style='margin-bottom:0.7em;'><strong>${cls.name}</strong>`;
+				if (cls.grades) formatted += ` (Grades: ${cls.grades})`;
+				formatted += '<br>';
+				if (cls.description) formatted += `<em>${cls.description}</em><br>`;
+				if (cls.prerequisites) formatted += `<span><b>Prerequisites:</b> ${cls.prerequisites}</span><br>`;
+				if (cls.gradRequirement) formatted += `<span><b>Grad Requirement:</b> ${cls.gradRequirement}</span><br>`;
+				if (cls.uc_csu_approval) formatted += `<span><b>UC/CSU Approval:</b> ${cls.uc_csu_approval}</span><br>`;
+				if (cls["UC/CSU_requirement"]) formatted += `<span><b>UC/CSU Requirement:</b> ${cls["UC/CSU_requirement"]}</span><br>`;
+				formatted += '</li>';
+			});
+			formatted += '</ul>';
+		} else if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+			formatted = '<dl style="margin:0 0 0 1.2em;">';
+			for (const key in obj) {
+				if (!obj.hasOwnProperty(key)) continue;
+				let label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+				let value = obj[key];
+				if (Array.isArray(value)) { value = value.join(', '); }
+				else if (typeof value === 'object') { value = `<pre style='white-space:pre-wrap;'>${JSON.stringify(value, null, 2)}</pre>`; }
+				formatted += `<dt style='font-weight:bold;margin-top:0.5em;'>${label}</dt><dd style='margin-left:1em;margin-bottom:0.5em;'>${value}</dd>`;
+			}
+			formatted += '</dl>';
+		} else {
+			formatted = markdownToHtml(reply);
+		}
+		chatWindow.removeChild(chatWindow.lastChild);
+		appendMessage('Counselor', formatted);
+		function markdownToHtml(md) {
+			if (!md) return '';
+			let html = md;
+			html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+			html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+			html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+			html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+			html = html.replace(/(^|\n)\s*\d+\.\s+(.*?)(?=\n\d+\.|\n\-|\n\*|\n|$)/gs, function(match) { let items = match.trim().split(/\n(?=\d+\.)/); let lis = items.map(i => '<li>' + i.replace(/^\d+\.\s+/, '') + '</li>').join(''); return '<ol>' + lis + '</ol>'; });
+			html = html.replace(/(^|\n)\s*[-\*]\s+(.*?)(?=\n[-\*]|\n\d+\.|\n|$)/gs, function(match) { let items = match.trim().split(/\n(?=[-\*]\s)/); let lis = items.map(i => '<li>' + i.replace(/^[-\*]\s+/, '') + '</li>').join(''); return '<ul>' + lis + '</ul>'; });
+			html = html.replace(/([^>])\n/g, '$1<br>');
+			return html;
+		}
+	} catch (err) {
+		chatWindow.removeChild(chatWindow.lastChild);
+		appendMessage('Counselor', "Sorry, there was an error contacting the counselor.");
+	}
+});
+function appendMessage(sender, text) {
+	const msgWrapper = document.createElement('div');
+	msgWrapper.style.display = 'flex';
+	msgWrapper.style.flexDirection = 'column';
+	msgWrapper.style.alignItems = sender === 'You' ? 'flex-end' : 'flex-start';
+	const senderLabel = document.createElement('span');
+	senderLabel.className = 'chat-sender';
+	senderLabel.textContent = sender;
+	const bubble = document.createElement('div');
+	bubble.className = 'chat-bubble ' + (sender === 'You' ? 'user' : 'counselor');
+	bubble.innerHTML = text;
+	msgWrapper.appendChild(senderLabel);
+	msgWrapper.appendChild(bubble);
+	chatWindow.appendChild(msgWrapper);
+	chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+</script>
+</body>
+</html>

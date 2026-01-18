@@ -1,0 +1,143 @@
+World History	001301-001302
+AP World History 1-2	001307-001308
+World Geography & Cultures	001309
+US History 1-2	001376-001377
+AP US History 1-2	001382-001383
+AP US History Seminar	001715
+Civics	001393
+Economics	001398
+AP US Government & Politics 1-2	001395-001396
+AP US Government Seminar	001710
+High School English 1-2	000301-000302
+Honors High School English 1-2	000303-000304
+High School English 3-4	000310-000311
+Honors Humanities 1-2	000313-000314
+Advanced Placement English Seminar	000374-000375
+American Literature 1-2	000387-000388
+Ethnic Literature 1-2	000365-000366
+Expository Reading & Writing 1-2	000315-000316
+World Literature 1-2	000393-000394
+AP English Language 1-2	000372-000373
+AP English Language Seminar	001702
+AP English Literature 1-2	000370-000371
+AP0English Literature Seminar	0001703
+Math Accel 1-2	001022-001023
+Integrated Math 1a-1b	001012  001013
+Integrated Math 2a-2b	001016-001017
+Integrated Math 3a-3b	001018-001019
+Trigonometry	001037
+College Algebra 1-2	001054-001055
+Pre-Calculus 1-2	001046-001047
+AP Calculus AB 1-2	001060-001061
+Bridge to AP Calculus BC	001704
+AP Calculus BC 1-2	001062-001063
+AP Statistics 1-2	001064-001065
+AP Statistics Seminar	001706
+Biology of the Living Earth 1-2	001236-001237
+AP Biology 3-4	001232-001233
+AP Biology Seminar	001714
+Principles of Biomedical Sciences 1-2	000880-000881
+Human Body Systems 1-2	000912-000913
+Honors Medical Interventions 1-2	001275-001276
+Fundamentals of Physics & Chemistry 1-2	001214-001215
+Chemistry in the Earth System 1-2	001246-001247
+Physics of the Universe	001248-001249
+Marine Science	001256-001257
+AP0Chemistry 3-4	001242-001243
+AP Chemistry Seminar	001716
+AP Environmental Science 1-2	001244-001245
+AP Environmental Science Seminar	001713
+AP Physics C: Mechanics 1a-1b	001262-001263
+AP Physics C: Mechanics Seminar	001708
+AP Physics C: Electricity & Magnetism 1-2	001264-001265
+AP Physics C: Electricity & Magnetism Seminar	001707
+Chinese 1-2	000401-000402
+Chinese 3-4	000403-000404
+Chinese 5-6	000417-000418
+Chinese 7-8	000428-000429
+Chinese 9	000438
+AP Chinese Language	000478-000479
+AP Chinese Language Seminar	000480
+Korean 1-2	000506-000507
+Spanish 1-2	000470-000471
+Spanish 3-4	000472-000473
+Spanish 5-6	000474-000475
+Spanish 7-8	000476-000477
+AP Spanish Language 1-2	000484-000485
+AP Spanish Language Seminar	0001712
+Drawing and Painting 1-2	000130-000131
+Drawing and Painting 3-4	000132-000133
+3D Computer Animation 1-2	000857-000858
+3D computer Animation 3-4	000859-000860
+Art of Game Design 1-2	000752-000753
+Ceramics 1-2	000115-000116
+Ceramics 3-4	000117-000118
+Design Mixed Media 1-2	000125-000126
+Digital Media Productions 1-2	000998-000999
+Digital Media Productions 3-4	000996-000997
+Drama 1-2	000345-000346
+Drama 3-4	000347-000348
+Drama 5-6	000349-000350
+Theater Study 7-8	000351-000352
+Technical Production for Theater 1-2	000340-000341
+Technical Production for Theater 3-4	000342-000343
+Digital Photography 1-2	001090-001091
+Digital Photography 3-4	001092-001093
+Photography 5-6	000870-000871
+Studio Art	000150
+AP Studio Art: Drawing 1-2	000151-000152
+AP Studio Art: 2D	000157-000158
+AP Studio Art: 3D	000159-000160
+Orchestra 1-2	001183-001184
+Chamber Orchestra	001188-001189
+Concert Band 1-2	001175-001176
+Wind Ensemble 1-2	001177-001178
+Symphonic Band 1-2	001190-001191
+AP Music Theory 1-2	001160-001161
+Harmony	001146
+Tall Flags (Dance Prop)	001195-001196
+Concert Choir 1-2	001120-001121
+Classical Vocal Ensemble	001110-001111
+AVID 1-2	001601-001602
+AVID 3-4	001603-001604
+AVID 5-6	001605-001606
+AVID Senior Seminar 1-2	001609-001610
+Ethnic Studies 1-2	001348-001349
+Business Law 1-2	000189-000190
+Introduction to Finance 1-2	000217-000218
+Marketing Economics 1-2	000985-000986
+Child Development & Psychology 1-2	000932-000933
+Child Development & Psychology 3-4	000934-000935
+Robotics 1-2	000914-000915
+Introduction to Engineering Design	000854-000855
+Honors Principles of Engineering	000840-000841
+Computer Science & Software Engineering 1-2	000971-000972
+AP Computer Science Principles 1-2	001258-001259
+Data Structures 1	001072
+AP Computer Science A 1-2	001070-001071
+Data Structures 2	001073
+AP Human Geography 1-2	001312-001313
+AP Human geography Seminar	001315
+AP Psychology 1-2	001327-001328
+Psychology 1	001323
+Link Crew Leadership 1-2	001884-001885
+ASB/Planning & Leadership	001886-001887
+Internship	001650
+Work Experience 1-2	001817-001818
+Yearbook 1-2	001632-001633
+Library & Info. Science Teaching Asst 1-2	001842-001843
+Vocational Learning Assistant	001830
+Academic Tutor	001864
+Academic Literacy 1-2	001857-001858
+Academic Success
+Art Exploration	000105
+ENS 1-2	001404-001405
+ENS 3	001406
+ENS 4	001407
+Health	000515
+Unified PE 1-2	001438-001439
+Racquet Sports	001420
+Weight Training	001493
+Marching PE/Band	001198
+Marching PE/Tall Flags	001199
+Advanced Basketball	001414-001415

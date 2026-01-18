@@ -176,6 +176,7 @@
     </div>
   </div>
   <script src="../scripts/courseDescriptions.js"></script>
+  <script src="catalog.js"></script>
   
   <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -691,6 +692,125 @@
       });
     }
 
+    // Render Special Education & ELD courses (from catalog.js)
+    const specialContainer = (function(){
+      // create container if not present in markup
+      const area = document.getElementById('area-special');
+      if (area) return area.querySelector('.courses');
+      return null;
+    })();
+    // If a dedicated container exists, populate it from window.courseCatalog
+    if (specialContainer && window.courseCatalog) {
+      // collect relevant courses
+      const raw = window.courseCatalog.filter(c => {
+        if (!c || !c.name) return false;
+        if (c.gradRequirement === 'Special Education') return true;
+        if (/^ELD\b/.test(c.name)) return true;
+        if (/Sheltered/.test(c.name)) return true;
+        return false;
+      });
+
+      // group by base name (strip trailing numeric suffix)
+      const groups = new Map();
+      raw.forEach(c => {
+        const m = c.name.match(/^(.*?)(?:\s+(\d+)(?:[-–]\d+)?(?:[ab])?)$/);
+        let key, idx;
+        if (m) {
+          key = m[1].trim();
+          idx = parseInt(m[2], 10);
+        } else {
+          key = c.name.trim();
+          idx = null;
+        }
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push({ idx, course: c });
+      });
+
+      // render grouped cards: pair sequential numeric entries into "1-2", "3-4", etc.
+      Array.from(groups.entries()).forEach(([key, arr]) => {
+        // sort by index (nulls to end)
+        arr.sort((a,b) => {
+          if (a.idx === null && b.idx === null) return 0;
+          if (a.idx === null) return 1;
+          if (b.idx === null) return -1;
+          return a.idx - b.idx;
+        });
+
+        // if no numeric suffixes, render each as-is
+        if (arr.every(x => x.idx === null)) {
+          arr.forEach(item => renderSpecialCard(item.course, item.course.name));
+          return;
+        }
+
+        // group numeric entries into pairs (1&2, 3&4, ...)
+        for (let i = 0; i < arr.length; i += 2) {
+          const first = arr[i];
+          const second = arr[i+1];
+          if (!first) continue;
+          let title;
+          if (first.idx !== null && second && second.idx !== null) {
+            title = `${key} ${first.idx}-${second.idx}`;
+          } else if (first.idx !== null) {
+            title = `${key} ${first.idx}`;
+          } else {
+            title = first.course.name;
+          }
+
+          // aggregate details
+          const codes = [];
+          const grades = new Set();
+          const prereqs = new Set();
+          let ucArea = null;
+          [first, second].forEach(x => {
+            if (!x) return;
+            const c = x.course;
+            if (c.courseCode) codes.push(c.courseCode);
+            if (Array.isArray(c.grades)) c.grades.forEach(g => grades.add(g));
+            else if (c.grades) grades.add(c.grades);
+            if (Array.isArray(c.prerequisites)) c.prerequisites.forEach(p => prereqs.add(p));
+            else if (c.prerequisites) prereqs.add(c.prerequisites);
+            if (!ucArea && c.ucArea) ucArea = c.ucArea;
+          });
+
+          const sampleCourse = first.course;
+          const combined = {
+            name: title,
+            courseCode: codes.length ? codes.join('-') : undefined,
+            grades: Array.from(grades).sort((a,b)=>a-b),
+            ucArea: ucArea,
+            prerequisites: Array.from(prereqs),
+            _source: [first.course, second && second.course].filter(Boolean)
+          };
+
+          renderSpecialCard(combined, title);
+        }
+      });
+    }
+
+    // helper to render a special-course card
+    function renderSpecialCard(c, displayName) {
+      const card = document.createElement('div');
+      card.className = 'course-card';
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'course-title';
+      titleDiv.textContent = displayName || c.name;
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'course-details';
+      let details = '';
+      if (c.courseCode) details += 'Code: ' + c.courseCode + '<br/>';
+      if (c.grades) details += 'Grades: ' + (Array.isArray(c.grades) ? c.grades.join(', ') : c.grades) + '<br/>';
+      if (c.ucArea) details += 'UC Area: ' + c.ucArea + '<br/>';
+      if (c.prerequisites && c.prerequisites.length) details += 'Prerequisites: ' + c.prerequisites.join(', ') + '<br/>';
+      detailsDiv.innerHTML = details;
+      const btn = document.createElement('button');
+      btn.className = 'learn-more-btn';
+      btn.textContent = 'Learn more';
+      btn.setAttribute('data-course', displayName || c.name);
+      card.appendChild(titleDiv);
+      card.appendChild(detailsDiv);
+      card.appendChild(btn);
+      specialContainer.appendChild(card);
+    }
     // Modal logic
     document.addEventListener('click', function(e) {
       if (e.target.classList && e.target.classList.contains('learn-more-btn')) {
@@ -763,6 +883,12 @@
 
 
       </div>
+    </section>
+    
+    <!-- Special Education & ELD -->
+    <section id="area-special">
+      <h2>Special Education & English Learners (ELD)</h2>
+      <div class="courses" id="special-courses"></div>
     </section>
   </div>
 </section>

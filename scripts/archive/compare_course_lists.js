@@ -1,0 +1,15 @@
+const fs = require('fs');
+const path = require('path');
+const a = fs.readFileSync(path.join(__dirname, 'catalog_names.txt'), 'utf8').split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+const b = fs.readFileSync(path.join(__dirname, 'md_names.txt'), 'utf8').split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+const norm = s=>s.toLowerCase().replace(/[\u2018\u2019]/g, "'").replace(/[\u2013\u2014]/g,'-').replace(/\s+/g,' ').replace(/\s*[:;,.]\s*$/,'').trim();
+const ma = new Map(a.map(x=>[norm(x), x]));
+const mb = new Map(b.map(x=>[norm(x), x]));
+const inMdNotInCatalog = [];
+const inCatalogNotInMd = [];
+for (const [k,v] of mb.entries()) if (!ma.has(k)) inMdNotInCatalog.push(v);
+for (const [k,v] of ma.entries()) if (!mb.has(k)) inCatalogNotInMd.push(v);
+console.log('Courses present in MD but NOT in catalog.js (candidates to ADD):\n');
+console.log(inMdNotInCatalog.join('\n') || '(none)');
+console.log('\n---\n\nCourses present in catalog.js but NOT in MD (verify removal):\n');
+console.log(inCatalogNotInMd.join('\n') || '(none)');
